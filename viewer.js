@@ -169,7 +169,9 @@ function getViewerConfiguration() {
       cursorHandToolButton: document.getElementById("cursorHandTool"),
       scrollVerticalButton: document.getElementById("scrollVertical"),
       scrollHorizontalButton: document.getElementById("scrollHorizontal"),
-      scrollWrappedButton: document.getElementById("scrollWrapped"),
+      scrollWrappedButton: document.getElementById('scrollWrapped'),
+      //$FB: add flipbook button
+      bookFlipButton: document.getElementById('bookFlip'),
       spreadNoneButton: document.getElementById("spreadNone"),
       spreadOddButton: document.getElementById("spreadOdd"),
       spreadEvenButton: document.getElementById("spreadEven"),
@@ -1365,6 +1367,13 @@ var PDFViewerApplication = {
                     if (spreadMode === _ui_utils.SpreadMode.UNKNOWN) {
                       spreadMode = stored.spreadMode | 0;
                     }
+                  }
+
+                  //$FB: prevent start in bookflip mode
+                  if(scrollMode === _ui_utils.ScrollMode.FLIP) {
+                    scrollMode = _ui_utils.ScrollMode.VERTICAL;
+                    bookFlip.toStart = true;
+                    $('#viewer').css({ opacity: 0 });
                   }
 
                   if (pageMode && sidebarView === _pdf_sidebar.SidebarView.UNKNOWN) {
@@ -3881,7 +3890,9 @@ var ScrollMode = {
   UNKNOWN: -1,
   VERTICAL: 0,
   HORIZONTAL: 1,
-  WRAPPED: 2
+  WRAPPED: 2,
+  //$FB: add flipbook scroll mode
+  FLIP: 3
 };
 exports.ScrollMode = ScrollMode;
 var SpreadMode = {
@@ -13335,7 +13346,17 @@ var SecondaryToolbar = /*#__PURE__*/function () {
         mode: _ui_utils.ScrollMode.WRAPPED
       },
       close: true
-    }, {
+    },
+    //$FB: add flipbook button
+    {
+      element: options.bookFlipButton,
+      eventName: 'switchscrollmode',
+      eventDetails: {
+        mode: _ui_utils.ScrollMode.FLIP
+      },
+      close: true
+    },
+    {
       element: options.spreadNoneButton,
       eventName: "switchspreadmode",
       eventDetails: {
