@@ -57,16 +57,16 @@ See https://github.com/adobe-type-tools/cmap-resources
         }
       });
     }
-    window.onload = function() {
-      //window.location.search - https://css-tricks.com/snippets/javascript/get-url-and-url-parts-in-javascript/
-      if (window.location.search == '') {
-        loadingInfo('document.pdf')
-      }
-      if (window.location.search.includes('loadingInfo')) {
-        doc = window.location.search.split('(').pop().split(')')[0]
-        loadingInfo(doc)
-      }
-    }
+    // window.onload = function() {
+    //   //window.location.search - https://css-tricks.com/snippets/javascript/get-url-and-url-parts-in-javascript/
+    //   if (window.location.search == '') {
+    //     loadingInfo('document.pdf')
+    //   }
+    //   if (window.location.search.includes('loadingInfo')) {
+    //     doc = window.location.search.split('(').pop().split(')')[0]
+    //     loadingInfo(doc)
+    //   }
+    // }
   </script>
   <style>
     #loadingInfo {
