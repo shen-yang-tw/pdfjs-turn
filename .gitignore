@@ -1,0 +1,17 @@
+﻿.tmp
+node_modules
+Assets
+temp
+documentation
+pages
+gulp-cache
+gulpfile*
+*.psd
+*.ai
+*.zip
+*複製*
+*old*
+*-i.*
+*css.map
+*.lock
+.DS_Store
