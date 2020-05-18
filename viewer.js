@@ -1747,13 +1747,13 @@ var validateFileURL;
     }
 
     try {
-      var viewerOrigin = new _pdfjsLib.URL(window.location.href).origin || 'null';
+      var viewerOrigin = new URL(window.location.href).origin || 'null';
 
       if (HOSTED_VIEWER_ORIGINS.includes(viewerOrigin)) {
         return;
       }
 
-      var _ref8 = new _pdfjsLib.URL(file, window.location.href),
+      var _ref8 = new URL(file, window.location.href),
           origin = _ref8.origin,
           protocol = _ref8.protocol;
 
