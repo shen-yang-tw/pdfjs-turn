@@ -20,7 +20,8 @@
     // event listeners when bookFlip need different handling 
     init: function() {
       console.log("It's bookFlip init");
-
+      $('#viewer').removeClass('pdfViewer').addClass('bookViewer');
+      
       $(document).on('rotationchanging', () => {
         this.rotate()
       });
