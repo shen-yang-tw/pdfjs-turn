@@ -22,6 +22,7 @@
       console.log("It's bookFlip init");
       $('#viewer').removeClass('pdfViewer').addClass('bookViewer');
       console.log("It's bookViewer");
+      console.log(PDFViewerApplication.pdfViewer.scrollMode);
 
       $(document).on('rotationchanging', () => {
         this.rotate()
@@ -41,7 +42,7 @@
 
       $(document).on('scrollmodechanged', () => {
         var scroll = PDFViewerApplication.pdfViewer.scrollMode;
-        console.log(scroll);
+        console.log(PDFViewerApplication.pdfViewer.scrollMode);
         if (scroll === 3) this.start();
         else this.stop();
         var button = PDFViewerApplication.appConfig.secondaryToolbar.scrollBookFlipButton;
