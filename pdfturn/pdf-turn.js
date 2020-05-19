@@ -37,6 +37,7 @@
       $(document).on('documentinit', () => {
         console.log("It's documentinit");
         this.stop();
+        console.log("It's documentinit and bookFlip stop");
         this._ready = false;
       });
 
