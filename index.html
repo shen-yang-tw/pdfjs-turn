@@ -41,32 +41,32 @@ See https://github.com/adobe-type-tools/cmap-resources
   <script src="pdfturn/turn.min.js"></script>
   <script src="pdfturn/pdf-turn.js"></script>
 
-  <!-- Added by Shen Yang - 2020/5/12 -->
+  <!-- Added by Shen Yang - 2020/5/19 -->
   <!-- Using the <URL>?file=<path>&<name.pdf> in the browser search bar to replace the default pdf.
     Cannot use the '#' to replace '&' because of custom javascript function 'loadingInfo'
     ex.: https://shen-yang-tw.github.io/pdfjs/index.html?file=./doc.pdf&loadingInfo(doc.pdf) - relative path
     ex.: https://shen-yang-tw.github.io/pdfjs/index.html?file=http://doc.pdf&loadingInfo(http://doc.pdf) - absolute path
   -->
   <script>
-    // function loadingInfo(doc) {
-    //   var loadingTask = pdfjsLib.getDocument(doc);
-    //   loadingTask.promise.then(function(pdf) {
-    //     var info = document.getElementById("loadingInfo")
-    //     if (info !== null) {
-    //       info.style.display = 'none';
-    //     }
-    //   });
-    // }
-    // window.onload = function() {
-    //   //window.location.search - https://css-tricks.com/snippets/javascript/get-url-and-url-parts-in-javascript/
-    //   if (window.location.search == '') {
-    //     loadingInfo('document.pdf')
-    //   }
-    //   if (window.location.search.includes('loadingInfo')) {
-    //     doc = window.location.search.split('(').pop().split(')')[0]
-    //     loadingInfo(doc)
-    //   }
-    // }
+    function loadingInfo(doc) {
+      var loadingTask = pdfjsLib.getDocument(doc);
+      loadingTask.promise.then(function(pdf) {
+        var info = document.getElementById("loadingInfo")
+        if (info !== null) {
+          info.style.display = 'none';
+        }
+      });
+    }
+    window.onload = function() {
+      //window.location.search - https://css-tricks.com/snippets/javascript/get-url-and-url-parts-in-javascript/
+      if (window.location.search == '') {
+        loadingInfo('document.pdf')
+      }
+      if (window.location.search.includes('loadingInfo')) {
+        doc = window.location.search.split('(').pop().split(')')[0]
+        loadingInfo(doc)
+      }
+    }
   </script>
   <style>
     #loadingInfo {
