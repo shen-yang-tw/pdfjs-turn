@@ -21,7 +21,7 @@
     init: function() {
       console.log("It's bookFlip init");
       $('#viewer').removeClass('pdfViewer').addClass('bookViewer');
-      
+
       $(document).on('rotationchanging', () => {
         this.rotate()
       });
@@ -87,6 +87,7 @@
       viewer._spreadMode = -1;
       $('.spreadModeButtons').removeClass('toggled');
       $('#' + selected).addClass('toggled');
+      console.log("It's button toggled");
 
       this._evSpread = PDFViewerApplication.eventBus._listeners.switchspreadmode;
       PDFViewerApplication.eventBus._listeners.switchspreadmode = null;
