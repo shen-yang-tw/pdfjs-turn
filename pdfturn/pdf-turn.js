@@ -22,7 +22,8 @@
       console.log("It's bookFlip init");
       $('#viewer').removeClass('pdfViewer').addClass('bookViewer');
       console.log("It's bookViewer");
-      console.log(PDFViewerApplication.pdfViewer.scrollMode);
+      var scroll = PDFViewerApplication.pdfViewer.scrollMode;
+      console.log(scroll);
 
       $(document).on('rotationchanging', () => {
         this.rotate()
