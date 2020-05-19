@@ -3880,10 +3880,10 @@ var TextLayerMode = {
 exports.TextLayerMode = TextLayerMode;
 var ScrollMode = {
   UNKNOWN: -1,
-  FLIP: 0,
-  VERTICAL: 1,
-  HORIZONTAL: 2,
-  WRAPPED: 3
+  VERTICAL: 0,
+  HORIZONTAL: 1,
+  WRAPPED: 2,
+  FLIP: 3
 };
 exports.ScrollMode = ScrollMode;
 var SpreadMode = {
