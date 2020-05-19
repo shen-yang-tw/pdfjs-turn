@@ -153,6 +153,7 @@
 
       $('#viewer .page').removeAttr('style');
       $('#viewer').removeAttr('style').removeClass('shadow bookViewer').addClass('pdfViewer');
+      console.log("It's stop and pdfViewer");
 
       var parent = this;
       $('#viewer .page').each(function() {
