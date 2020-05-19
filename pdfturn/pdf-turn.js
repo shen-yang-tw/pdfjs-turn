@@ -19,6 +19,8 @@
 
     // event listeners when bookFlip need different handling 
     init: function() {
+      console.log("It's bookFlip init");
+      
       $(document).on('rotationchanging', () => {
         this.rotate()
       });
@@ -30,6 +32,7 @@
       });
 
       $(document).on('documentinit', () => {
+        console.log("It's documentinit");
         this.stop();
         this._ready = false;
       });
@@ -51,7 +54,7 @@
       });
 
       $(document).on('pagesloaded', () => {
-        console.log("It's ready")
+        console.log("It's pagesloaded");
         this._ready = true;
         if (this.toStart) {
           this.toStart = false;
