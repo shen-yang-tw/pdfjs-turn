@@ -40,6 +40,7 @@
 
       $(document).on('scrollmodechanged', () => {
         var scroll = PDFViewerApplication.pdfViewer.scrollMode;
+        console.log(scroll);
         if (scroll === 3) this.start();
         else this.stop();
         var button = PDFViewerApplication.appConfig.secondaryToolbar.bookFlipButton;
