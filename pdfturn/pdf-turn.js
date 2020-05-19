@@ -43,7 +43,7 @@
         console.log(scroll);
         if (scroll === 3) this.start();
         else this.stop();
-        var button = PDFViewerApplication.appConfig.secondaryToolbar.bookFlipButton;
+        var button = PDFViewerApplication.appConfig.secondaryToolbar.scrollBookFlipButton;
         button.classList.toggle('toggled', scroll === 3);
       });
 
