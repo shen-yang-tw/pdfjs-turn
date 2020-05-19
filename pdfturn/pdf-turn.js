@@ -51,6 +51,7 @@
       });
 
       $(document).on('pagesloaded', () => {
+        console.log("It's ready")
         this._ready = true;
         if (this.toStart) {
           this.toStart = false;
