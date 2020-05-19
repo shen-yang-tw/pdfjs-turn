@@ -22,8 +22,6 @@
       console.log("It's bookFlip init");
       $('#viewer').removeClass('pdfViewer').addClass('bookViewer');
       console.log("It's bookViewer");
-      var scroll = PDFViewerApplication.pdfViewer.scrollMode;
-      console.log(scroll);
 
       $(document).on('rotationchanging', () => {
         this.rotate()
@@ -36,13 +34,14 @@
       });
 
       $(document).on('documentinit', () => {
-        console.log("It's documentinit");
+        console.log("It's on documentinit");
         this.stop();
         console.log("It's documentinit and bookFlip stop");
         this._ready = false;
       });
 
       $(document).on('scrollmodechanged', () => {
+        console.log("It's on scrollmodechanged");
         var scroll = PDFViewerApplication.pdfViewer.scrollMode;
         console.log(scroll);
         if (scroll === 3) this.start();
@@ -52,6 +51,7 @@
       });
 
       $(document).on('switchspreadmode', (evt) => {
+        console.log("It's on switchspreadmode");
         this.spread(evt.originalEvent.detail.mode);
         PDFViewerApplication.eventBus.dispatch('spreadmodechanged', {
           source: PDFViewerApplication,
@@ -60,7 +60,7 @@
       });
 
       $(document).on('pagesloaded', () => {
-        console.log("It's pagesloaded");
+        console.log("It's on pagesloaded");
         this._ready = true;
         if (this.toStart) {
           this.toStart = false;
