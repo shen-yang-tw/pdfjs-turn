@@ -44,7 +44,7 @@
 
       $(document).on('scrollmodechanged', () => {
         var scroll = PDFViewerApplication.pdfViewer.scrollMode;
-        console.log(PDFViewerApplication.pdfViewer.scrollMode);
+        console.log(scroll);
         if (scroll === 3) this.start();
         else this.stop();
         var button = PDFViewerApplication.appConfig.secondaryToolbar.scrollBookFlipButton;
@@ -69,6 +69,7 @@
       });
 
       $(document).on('baseviewerinit', () => {
+        console.log("It's on baseviewerinit");
         PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
 
         this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
