@@ -139,6 +139,7 @@
     },
     // shutdown flipbook
     stop: function() {
+      console.log("It's flipbook stop");
       if (!this.active) return;
       this.active = false;
 
