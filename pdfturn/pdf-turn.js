@@ -21,6 +21,7 @@
     init: function() {
       console.log("It's bookFlip init");
       $('#viewer').removeClass('pdfViewer').addClass('bookViewer');
+      console.log("It's bookViewer");
 
       $(document).on('rotationchanging', () => {
         this.rotate()
