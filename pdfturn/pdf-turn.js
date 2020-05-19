@@ -20,7 +20,7 @@
     // event listeners when bookFlip need different handling 
     init: function() {
       console.log("It's bookFlip init");
-      
+
       $(document).on('rotationchanging', () => {
         this.rotate()
       });
@@ -71,6 +71,7 @@
     },
     // startup flipbook
     start: function() {
+      console.log("It's flipbook start");
       if (this.active || !this._ready) return;
       this.active = true;
 
