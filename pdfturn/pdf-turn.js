@@ -34,10 +34,10 @@
       document.addEventListener("webviewerloaded", function() {
         PDFViewerApplication.initializedPromise.then(function() {
           // Create the event bus instance for the viewer application.
-          const eventBus = new pdfjsViewer.EventBus();
+          const eventBus = new PDFViewerApplication.EventBus();
 
           // Pass the event bus instance to the PDF viewer.
-          const pdfViewer = new pdfjsViewer.PDFViewer({
+          const pdfViewer = new PDFViewerApplication.PDFViewer({
             eventBus: eventBus,
           });
 
