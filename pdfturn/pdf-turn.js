@@ -5,10 +5,10 @@
   /// all code added in viewer.js (from pdfjs build) in order to support 
   /// flipbook is commented with '$FB:' string to allow to find it easilly 
   
-  // "use strict";
+  "use strict";
 
-  // pdfjsLib.GlobalWorkerOptions.workerSrc =
-  //   "../build/pdf.worker.js";
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "../build/pdf.worker.js";
 
   var bookFlip = {
     _width: [], //flipbook pages width
