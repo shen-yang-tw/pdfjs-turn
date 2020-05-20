@@ -284,7 +284,7 @@
         console.log(scroll);
         if (scroll === 3) bookFlip.start();
         else bookFlip.stop();
-      }, scrollModeChanged);
+      });
 
     });
   }
