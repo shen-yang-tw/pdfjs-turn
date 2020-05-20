@@ -10,33 +10,6 @@
   // pdfjsLib.GlobalWorkerOptions.workerSrc =
   //   "../build/pdf.worker.js";
 
-  function loadingInfo(doc) {
-    var loadingTask = pdfjsLib.getDocument(doc);
-    loadingTask.promise.then(function(pdf) {
-      var info = document.getElementById("loadingInfo")
-      if (info !== null) {
-        info.style.display = 'none';
-      }
-      $(document).on('baseviewerinit', () => {
-        console.log("It's on baseviewerinit");
-        PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
-        
-        this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
-        this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
-      });
-        
-    });
-  }
-  window.onload = function() {
-    //window.location.search - https://css-tricks.com/snippets/javascript/get-url-and-url-parts-in-javascript/
-    if (window.location.search == '') {
-      loadingInfo('document.pdf')
-    }
-    if (window.location.search.includes('loadingInfo')) {
-      doc = window.location.search.split('(').pop().split(')')[0]
-      loadingInfo(doc)
-    }
-  }
 
   // document.addEventListener("webviewerloaded", function() {
   //   PDFViewerApplication.initializedPromise.then(function() {
@@ -65,24 +38,24 @@
       //---- Coded by Shen Yang ----------------------------------//
       //---- See: https://github.com/mozilla/pdf.js/wiki/Third-party-viewer-usage ----------------------------------//
 
-      $(document).eventBus.on('rotationchanging', () => {
+      $(document).on('rotationchanging', () => {
         this.rotate()
       });
-      $(document).eventBus.on('scalechanging', () => {
+      $(document).on('scalechanging', () => {
         this.resize()
       });
-      $(document).eventBus.on('pagechanging', () => {
+      $(document).on('pagechanging', () => {
         this.flip()
       });
 
-      $(document).eventBus.on('documentinit', () => {
+      $(document).on('documentinit', () => {
         console.log("It's on documentinit");
         this.stop();
         console.log("It's documentinit and bookFlip stop");
         this._ready = false;
       });
 
-      $(document).eventBus.on('scrollmodechanged', () => {
+      $(document).on('scrollmodechanged', () => {
         console.log("It's on scrollmodechanged");
         var scroll = PDFViewerApplication.pdfViewer.scrollMode;
         console.log(scroll);
@@ -92,7 +65,7 @@
         // button.classList.toggle('toggled', scroll === 3);
       });
 
-      $(document).eventBus.on('switchspreadmode', (evt) => {
+      $(document).on('switchspreadmode', (evt) => {
         console.log("It's on switchspreadmode");
         this.spread(evt.originalEvent.detail.mode);
         PDFViewerApplication.eventBus.dispatch('spreadmodechanged', {
@@ -101,7 +74,7 @@
         });
       });
 
-      $(document).eventBus.on('pagesloaded', () => {
+      $(document).on('pagesloaded', () => {
         console.log("It's on pagesloaded");
         this._ready = true;
         if (this.toStart) {
@@ -110,7 +83,7 @@
         }
       });
 
-      $(document).eventBus.on('baseviewerinit', () => {
+      $(document).on('baseviewerinit', () => {
         console.log("It's on baseviewerinit");
         PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
 
@@ -289,3 +262,38 @@
   };
 
   bookFlip.init();
+
+  function loadingInfo(doc) {
+    var loadingTask = pdfjsLib.getDocument(doc);
+    loadingTask.promise.then(function(pdf) {
+      var info = document.getElementById("loadingInfo")
+      if (info !== null) {
+        info.style.display = 'none';
+      }
+      $(document).on('baseviewerinit', () => {
+        console.log("It's on baseviewerinit");
+        PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
+        
+        bookFlip._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
+        bookFlip._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
+      });
+      $(document).on('scrollmodechanged', () => {
+        console.log("It's on scrollmodechanged");
+        var scroll = PDFViewerApplication.pdfViewer.scrollMode;
+        console.log(scroll);
+        if (scroll === 3) bookFlip.start();
+        else bookFlip.stop();
+      });
+        
+    });
+  }
+  window.onload = function() {
+    //window.location.search - https://css-tricks.com/snippets/javascript/get-url-and-url-parts-in-javascript/
+    if (window.location.search == '') {
+      loadingInfo('document.pdf')
+    }
+    if (window.location.search.includes('loadingInfo')) {
+      doc = window.location.search.split('(').pop().split(')')[0]
+      loadingInfo(doc)
+    }
+  }
