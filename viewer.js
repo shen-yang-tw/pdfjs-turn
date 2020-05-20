@@ -13519,7 +13519,7 @@ var SecondaryToolbar = /*#__PURE__*/function () {
       this.eventBus._on("secondarytoolbarreset", function (evt) {
         if (evt.source === _this3) {
           scrollModeChanged({
-            mode: _ui_utils.ScrollMode.FLIP
+            mode: _ui_utils.ScrollMode.VERTICAL
           });
         }
       });

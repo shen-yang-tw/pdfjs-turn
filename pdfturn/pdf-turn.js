@@ -58,8 +58,8 @@
         console.log(scroll);
         if (scroll === 3) this.start();
         else this.stop();
-        var button = PDFViewerApplication.appConfig.secondaryToolbar.scrollBookFlipButton;
-        button.classList.toggle('toggled', scroll === 3);
+        // var button = PDFViewerApplication.appConfig.secondaryToolbar.scrollBookFlipButton;
+        // button.classList.toggle('toggled', scroll === 3);
       });
 
       document.addEventListener('switchspreadmode', (evt) => {
