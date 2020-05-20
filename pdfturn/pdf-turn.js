@@ -38,24 +38,24 @@
       //---- Coded by Shen Yang ----------------------------------//
       //---- See: https://github.com/mozilla/pdf.js/wiki/Third-party-viewer-usage ----------------------------------//
 
-      PDFViewerApplication.eventBus._on('rotationchanging', () => {
+      $(document).on('rotationchanging', () => {
         this.rotate()
       });
-      PDFViewerApplication.eventBus._on('scalechanging', () => {
+      $(document).on('scalechanging', () => {
         this.resize()
       });
-      PDFViewerApplication.eventBus._on('pagechanging', () => {
+      $(document).on('pagechanging', () => {
         this.flip()
       });
 
-      PDFViewerApplication.eventBus._on('documentinit', () => {
+      $(document).on('documentinit', () => {
         console.log("It's on documentinit");
         this.stop();
         console.log("It's documentinit and bookFlip stop");
         this._ready = false;
       });
 
-      PDFViewerApplication.eventBus._on('scrollmodechanged', () => {
+      $(document).on('scrollmodechanged', () => {
         console.log("It's on scrollmodechanged");
         var scroll = PDFViewerApplication.pdfViewer.scrollMode;
         console.log(scroll);
@@ -65,7 +65,7 @@
         // button.classList.toggle('toggled', scroll === 3);
       });
 
-      PDFViewerApplication.eventBus._on('switchspreadmode', (evt) => {
+      $(document).on('switchspreadmode', (evt) => {
         console.log("It's on switchspreadmode");
         this.spread(evt.originalEvent.detail.mode);
         PDFViewerApplication.eventBus.dispatch('spreadmodechanged', {
@@ -74,7 +74,7 @@
         });
       });
 
-      PDFViewerApplication.eventBus._on('pagesloaded', () => {
+      $(document).on('pagesloaded', () => {
         console.log("It's on pagesloaded");
         this._ready = true;
         if (this.toStart) {
@@ -83,7 +83,7 @@
         }
       });
 
-      PDFViewerApplication.eventBus._on('baseviewerinit', () => {
+      $(document).on('baseviewerinit', () => {
         console.log("It's on baseviewerinit");
         PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
 
