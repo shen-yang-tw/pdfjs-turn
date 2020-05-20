@@ -17,7 +17,7 @@
       if (info !== null) {
         info.style.display = 'none';
       }
-      pdf.eventBus.on('baseviewerinit', () => {
+      pdf.on('baseviewerinit', () => {
         console.log("It's on baseviewerinit");
         PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
 
