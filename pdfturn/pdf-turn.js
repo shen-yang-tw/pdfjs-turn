@@ -10,26 +10,37 @@
   // pdfjsLib.GlobalWorkerOptions.workerSrc =
   //   "../build/pdf.worker.js";
 
-  var pdf = document.getElementById('#viewer');
-  document.addEventListener("webviewerloaded", function() {
-    PDFViewerApplication.initializedPromise.then(function() {
-      console.log("It's webviewerloaded")
-      // Create the event bus instance for the viewer application.
-      // const eventBus = new PDFViewerApplication.EventBus();
-
-      // Pass the event bus instance to the PDF viewer.
-      const pdfViewer = new pdf.PDFViewer({
-        eventBus: PDFViewerApplication.EventBus(),
-      });
-      eventBus.on('baseviewerinit', () => {
+  function loadingInfo(doc) {
+    var loadingTask = pdfjsLib.getDocument(doc);
+    loadingTask.promise.then(function(pdf) {
+      var info = document.getElementById("loadingInfo")
+      if (info !== null) {
+        info.style.display = 'none';
+      }
+      if (PDFViewerApplication.eventBus._listeners[baseviewerinit]) {
         console.log("It's on baseviewerinit");
         PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
-
         this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
         this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
-      });
-    })
-  });
+      }
+    });
+  }
+  window.onload = function() {
+    //window.location.search - https://css-tricks.com/snippets/javascript/get-url-and-url-parts-in-javascript/
+    if (window.location.search == '') {
+      loadingInfo('document.pdf')
+    }
+    if (window.location.search.includes('loadingInfo')) {
+      doc = window.location.search.split('(').pop().split(')')[0]
+      loadingInfo(doc)
+    }
+  }
+
+  // document.addEventListener("webviewerloaded", function() {
+  //   PDFViewerApplication.initializedPromise.then(function() {
+  //     console.log("It's webviewerloaded")
+  //   })
+  // });
 
   var bookFlip = {
     _width: [], //flipbook pages width
@@ -42,6 +53,7 @@
     _intoView: null, //link handler default function
     _visPages: null, //visible pages function
     _ready: false, //ready to start flipbook
+    loadingTask: pdfjsLib.getDocument(doc),
 
     // event listeners when bookFlip need different handling 
     init: function() {
@@ -194,6 +206,16 @@
         $(this).css('width', parent._size(page, 'width')).css('height', parent._size(page, 'height'));
       });
 
+    },
+    // pdf loaded
+    loadingInfo: function(doc) {
+      // var loadingTask = pdfjsLib.getDocument(doc);
+      this.loadingTask.promise.then(function(pdf) {
+        var info = document.getElementById("loadingInfo")
+        if (info !== null) {
+          info.style.display = 'none';
+        }
+      });
     },
     // resize flipbook pages
     resize: function() {
