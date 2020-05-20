@@ -10,6 +10,12 @@
   // pdfjsLib.GlobalWorkerOptions.workerSrc =
   //   "../build/pdf.worker.js";
 
+  document.addEventListener("webviewerloaded", function() {
+    PDFViewerApplication.initializedPromise.then(function() {
+      console.log("It's webviewerloaded")
+    })
+  });
+
   var bookFlip = {
     _width: [], //flipbook pages width
     _height: [], //flipbook pages height
@@ -30,11 +36,6 @@
 
       //---- Coded by Shen Yang ----------------------------------//
       //---- See: https://github.com/mozilla/pdf.js/wiki/Third-party-viewer-usage ----------------------------------//
-
-      // document.addEventListener("webviewerloaded", function() {
-      //   PDFViewerApplication.initializedPromise.then(function() {
-      //   })
-      // });
 
       $(document).eventBus._on('rotationchanging', () => {
         this.rotate()
