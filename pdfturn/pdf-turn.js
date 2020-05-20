@@ -17,13 +17,14 @@
       if (info !== null) {
         info.style.display = 'none';
       }
-      pdf.on('baseviewerinit', () => {
+      $(document).on('baseviewerinit', () => {
         console.log("It's on baseviewerinit");
         PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
-
-        pdf._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
-        pdf._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
+        
+        this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
+        this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
       });
+        
     });
   }
   window.onload = function() {
