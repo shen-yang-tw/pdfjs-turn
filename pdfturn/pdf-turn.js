@@ -31,71 +31,72 @@
       //---- Coded by Shen Yang ----------------------------------//
       //---- See: https://github.com/mozilla/pdf.js/wiki/Third-party-viewer-usage ----------------------------------//
 
-      document.addEventListener("webviewerloaded", function() {
-        PDFViewerApplication.initializedPromise.then(function() {
-          // Create the event bus instance for the viewer application.
-          const eventBus = new PDFViewerApplication.EventBus();
+      // document.addEventListener("webviewerloaded", function() {
+      //   PDFViewerApplication.initializedPromise.then(function() {
+      //     // Create the event bus instance for the viewer application.
+      //     const eventBus = new PDFViewerApplication.EventBus();
 
-          // Pass the event bus instance to the PDF viewer.
-          const pdfViewer = new PDFViewerApplication.PDFViewer({
-            eventBus: eventBus,
-          });
+      //     // Pass the event bus instance to the PDF viewer.
+      //     const pdfViewer = new PDFViewerApplication.PDFViewer({
+      //       eventBus: eventBus,
+      //     });
 
-          // Listen for `pagesinit` events on the event bus.
-          eventBus.on('rotationchanging', () => {
-            this.rotate()
-          });
-          eventBus.on('scalechanging', () => {
-            this.resize()
-          });
-          eventBus.on('pagechanging', () => {
-            this.flip()
-          });
-    
-          eventBus.on('documentinit', () => {
-            console.log("It's on documentinit");
-            this.stop();
-            console.log("It's documentinit and bookFlip stop");
-            this._ready = false;
-          });
-    
-          eventBus.on('scrollmodechanged', () => {
-            console.log("It's on scrollmodechanged");
-            var scroll = PDFViewerApplication.pdfViewer.scrollMode;
-            console.log(scroll);
-            if (scroll === 3) this.start();
-            else this.stop();
-            var button = PDFViewerApplication.appConfig.secondaryToolbar.scrollBookFlipButton;
-            button.classList.toggle('toggled', scroll === 3);
-          });
-    
-          eventBus.on('switchspreadmode', (evt) => {
-            console.log("It's on switchspreadmode");
-            this.spread(evt.originalEvent.detail.mode);
-            PDFViewerApplication.eventBus.dispatch('spreadmodechanged', {
-              source: PDFViewerApplication,
-              mode: evt.originalEvent.detail.mode
-            });
-          });
-    
-          eventBus.on('pagesloaded', () => {
-            console.log("It's on pagesloaded");
-            this._ready = true;
-            if (this.toStart) {
-              this.toStart = false;
-              PDFViewerApplication.pdfViewer.scrollMode = 3;
-            }
-          });
-    
-          eventBus.on('baseviewerinit', () => {
-            console.log("It's on baseviewerinit");
-            PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
-    
-            this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
-            this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
-          });    
-        })
+      //   })
+      // });
+
+      document.addEventListener('rotationchanging', () => {
+        this.rotate()
       });
+      document.addEventListener('scalechanging', () => {
+        this.resize()
+      });
+      document.addEventListener('pagechanging', () => {
+        this.flip()
+      });
+
+      document.addEventListener('documentinit', () => {
+        console.log("It's on documentinit");
+        this.stop();
+        console.log("It's documentinit and bookFlip stop");
+        this._ready = false;
+      });
+
+      document.addEventListener('scrollmodechanged', () => {
+        console.log("It's on scrollmodechanged");
+        var scroll = PDFViewerApplication.pdfViewer.scrollMode;
+        console.log(scroll);
+        if (scroll === 3) this.start();
+        else this.stop();
+        var button = PDFViewerApplication.appConfig.secondaryToolbar.scrollBookFlipButton;
+        button.classList.toggle('toggled', scroll === 3);
+      });
+
+      document.addEventListener('switchspreadmode', (evt) => {
+        console.log("It's on switchspreadmode");
+        this.spread(evt.originalEvent.detail.mode);
+        PDFViewerApplication.eventBus.dispatch('spreadmodechanged', {
+          source: PDFViewerApplication,
+          mode: evt.originalEvent.detail.mode
+        });
+      });
+
+      document.addEventListener('pagesloaded', () => {
+        console.log("It's on pagesloaded");
+        this._ready = true;
+        if (this.toStart) {
+          this.toStart = false;
+          PDFViewerApplication.pdfViewer.scrollMode = 3;
+        }
+      });
+
+      document.addEventListener('baseviewerinit', () => {
+        console.log("It's on baseviewerinit");
+        PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
+
+        this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
+        this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
+      });
+  
 
     },
     // startup flipbook
