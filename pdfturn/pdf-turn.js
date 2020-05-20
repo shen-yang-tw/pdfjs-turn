@@ -13,6 +13,13 @@
   document.addEventListener("webviewerloaded", function() {
     PDFViewerApplication.initializedPromise.then(function() {
       console.log("It's webviewerloaded")
+      this.eventBus.on('baseviewerinit', () => {
+        console.log("It's on baseviewerinit");
+        PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
+
+        this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
+        this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
+      });
     })
   });
 
@@ -31,30 +38,29 @@
     // event listeners when bookFlip need different handling 
     init: function() {
       console.log("It's bookFlip init");
-      $('#viewer').removeClass('pdfViewer').addClass('bookViewer');
-      console.log("It's bookViewer");
+      $('#viewer').addClass('bookViewer');
 
       //---- Coded by Shen Yang ----------------------------------//
       //---- See: https://github.com/mozilla/pdf.js/wiki/Third-party-viewer-usage ----------------------------------//
 
-      $(document).eventBus._on('rotationchanging', () => {
+      $(document).eventBus.on('rotationchanging', () => {
         this.rotate()
       });
-      $(document).eventBus._on('scalechanging', () => {
+      $(document).eventBus.on('scalechanging', () => {
         this.resize()
       });
-      $(document).eventBus._on('pagechanging', () => {
+      $(document).eventBus.on('pagechanging', () => {
         this.flip()
       });
 
-      $(document).eventBus._on('documentinit', () => {
+      $(document).eventBus.on('documentinit', () => {
         console.log("It's on documentinit");
         this.stop();
         console.log("It's documentinit and bookFlip stop");
         this._ready = false;
       });
 
-      $(document).eventBus._on('scrollmodechanged', () => {
+      $(document).eventBus.on('scrollmodechanged', () => {
         console.log("It's on scrollmodechanged");
         var scroll = PDFViewerApplication.pdfViewer.scrollMode;
         console.log(scroll);
@@ -64,7 +70,7 @@
         // button.classList.toggle('toggled', scroll === 3);
       });
 
-      $(document).eventBus._on('switchspreadmode', (evt) => {
+      $(document).eventBus.on('switchspreadmode', (evt) => {
         console.log("It's on switchspreadmode");
         this.spread(evt.originalEvent.detail.mode);
         PDFViewerApplication.eventBus.dispatch('spreadmodechanged', {
@@ -73,7 +79,7 @@
         });
       });
 
-      $(document).eventBus._on('pagesloaded', () => {
+      $(document).eventBus.on('pagesloaded', () => {
         console.log("It's on pagesloaded");
         this._ready = true;
         if (this.toStart) {
@@ -82,7 +88,7 @@
         }
       });
 
-      $(document).eventBus._on('baseviewerinit', () => {
+      $(document).eventBus.on('baseviewerinit', () => {
         console.log("It's on baseviewerinit");
         PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
 
