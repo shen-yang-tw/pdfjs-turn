@@ -30,29 +30,30 @@
 
       //---- Coded by Shen Yang ----------------------------------//
       //---- See: https://github.com/mozilla/pdf.js/wiki/Third-party-viewer-usage ----------------------------------//
-      PDFViewerApplication.eventBus.dispatch('localized');
+
       // document.addEventListener("webviewerloaded", function() {
       //   PDFViewerApplication.initializedPromise.then(function() {
       //   })
       // });
-      document.addEventListener('rotationchanging', () => {
+      
+      $(document).on('rotationchanging', () => {
         this.rotate()
       });
-      document.addEventListener('scalechanging', () => {
+      $(document).on('scalechanging', () => {
         this.resize()
       });
-      document.addEventListener('pagechanging', () => {
+      $(document).on('pagechanging', () => {
         this.flip()
       });
 
-      document.addEventListener('documentinit', () => {
+      $(document).on('documentinit', () => {
         console.log("It's on documentinit");
         this.stop();
         console.log("It's documentinit and bookFlip stop");
         this._ready = false;
       });
 
-      document.addEventListener('scrollmodechanged', () => {
+      $(document).on('scrollmodechanged', () => {
         console.log("It's on scrollmodechanged");
         var scroll = PDFViewerApplication.pdfViewer.scrollMode;
         console.log(scroll);
@@ -62,7 +63,7 @@
         // button.classList.toggle('toggled', scroll === 3);
       });
 
-      document.addEventListener('switchspreadmode', (evt) => {
+      $(document).on('switchspreadmode', (evt) => {
         console.log("It's on switchspreadmode");
         this.spread(evt.originalEvent.detail.mode);
         PDFViewerApplication.eventBus.dispatch('spreadmodechanged', {
@@ -71,7 +72,7 @@
         });
       });
 
-      document.addEventListener('pagesloaded', () => {
+      $(document).on('pagesloaded', () => {
         console.log("It's on pagesloaded");
         this._ready = true;
         if (this.toStart) {
@@ -80,7 +81,7 @@
         }
       });
 
-      document.addEventListener('baseviewerinit', () => {
+      $(document).on('baseviewerinit', () => {
         console.log("It's on baseviewerinit");
         PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
 
