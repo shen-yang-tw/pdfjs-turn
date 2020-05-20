@@ -270,21 +270,21 @@
       if (info !== null) {
         info.style.display = 'none';
       }
-      // if (PDFViewerApplication.pdfViewer.scrollMode === 3) {
-      //   console.log("It's on baseviewerinit");
-      //   PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
-
-      //   bookFlip._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
-      //   bookFlip._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
-      // }
-
-      window.PDFViewerApplication.addEventListener('scrollmodechanged', () => {
+      if (PDFViewerApplication.pdfViewer.scrollMode === 3) {
         console.log("It's on scrollmodechanged");
         var scroll = PDFViewerApplication.pdfViewer.scrollMode;
         console.log(scroll);
         if (scroll === 3) bookFlip.start();
         else bookFlip.stop();
-      });
+      }
+
+      // window.PDFViewerApplication.addEventListener('scrollmodechanged', () => {
+      //   console.log("It's on scrollmodechanged");
+      //   var scroll = PDFViewerApplication.pdfViewer.scrollMode;
+      //   console.log(scroll);
+      //   if (scroll === 3) bookFlip.start();
+      //   else bookFlip.stop();
+      // });
 
     });
   }
