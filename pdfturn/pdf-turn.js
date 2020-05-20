@@ -270,14 +270,14 @@
       if (info !== null) {
         info.style.display = 'none';
       }
-      pdf.PDFViewer.on('baseviewerinit', () => {
+      window.PDFViewerApplication.on('baseviewerinit', () => {
         console.log("It's on baseviewerinit");
         PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
 
         bookFlip._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
         bookFlip._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
       });
-      pdf.PDFViewer.on('scrollmodechanged', () => {
+      window.PDFViewerApplication.on('scrollmodechanged', () => {
         console.log("It's on scrollmodechanged");
         var scroll = PDFViewerApplication.pdfViewer.scrollMode;
         console.log(scroll);
