@@ -38,24 +38,24 @@
       //---- Coded by Shen Yang ----------------------------------//
       //---- See: https://github.com/mozilla/pdf.js/wiki/Third-party-viewer-usage ----------------------------------//
 
-      $(document).on('rotationchanging', () => {
+      PDFViewerApplication.eventBus._on('rotationchanging', () => {
         this.rotate()
       });
-      $(document).on('scalechanging', () => {
+      PDFViewerApplication.eventBus._on('scalechanging', () => {
         this.resize()
       });
-      $(document).on('pagechanging', () => {
+      PDFViewerApplication.eventBus._on('pagechanging', () => {
         this.flip()
       });
 
-      $(document).on('documentinit', () => {
+      PDFViewerApplication.eventBus._on('documentinit', () => {
         console.log("It's on documentinit");
         this.stop();
         console.log("It's documentinit and bookFlip stop");
         this._ready = false;
       });
 
-      $(document).on('scrollmodechanged', () => {
+      PDFViewerApplication.eventBus._on('scrollmodechanged', () => {
         console.log("It's on scrollmodechanged");
         var scroll = PDFViewerApplication.pdfViewer.scrollMode;
         console.log(scroll);
@@ -65,7 +65,7 @@
         // button.classList.toggle('toggled', scroll === 3);
       });
 
-      $(document).on('switchspreadmode', (evt) => {
+      PDFViewerApplication.eventBus._on('switchspreadmode', (evt) => {
         console.log("It's on switchspreadmode");
         this.spread(evt.originalEvent.detail.mode);
         PDFViewerApplication.eventBus.dispatch('spreadmodechanged', {
@@ -74,7 +74,7 @@
         });
       });
 
-      $(document).on('pagesloaded', () => {
+      PDFViewerApplication.eventBus._on('pagesloaded', () => {
         console.log("It's on pagesloaded");
         this._ready = true;
         if (this.toStart) {
@@ -83,7 +83,7 @@
         }
       });
 
-      $(document).on('baseviewerinit', () => {
+      PDFViewerApplication.eventBus._on('baseviewerinit', () => {
         console.log("It's on baseviewerinit");
         PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
 
@@ -94,6 +94,7 @@
     },
     // startup flipbook
     start: function() {
+      $('#viewer').removeClass('pdfViewer').addClass('bookViewer');
       console.log("It's flipbook start");
       if (this.active || !this._ready) return;
       this.active = true;
@@ -153,7 +154,7 @@
           }
         },
         display: this._spreadType()
-      });
+      }, console.log("It's turn"));
     },
     // shutdown flipbook
     stop: function() {
