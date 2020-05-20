@@ -17,7 +17,7 @@
       if (info !== null) {
         info.style.display = 'none';
       }
-      if (PDFViewerApplication.eventBus._listeners[baseviewerinit]) {
+      if (PDFViewerApplication.eventBus._listeners == 'baseviewerinit') {
         console.log("It's on baseviewerinit");
         PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
         this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
@@ -53,7 +53,7 @@
     _intoView: null, //link handler default function
     _visPages: null, //visible pages function
     _ready: false, //ready to start flipbook
-    loadingTask: pdfjsLib.getDocument(doc),
+    // loadingTask: pdfjsLib.getDocument(doc),
 
     // event listeners when bookFlip need different handling 
     init: function() {
@@ -209,8 +209,8 @@
     },
     // pdf loaded
     loadingInfo: function(doc) {
-      // var loadingTask = pdfjsLib.getDocument(doc);
-      this.loadingTask.promise.then(function(pdf) {
+      var loadingTask = pdfjsLib.getDocument(doc);
+      loadingTask.promise.then(function(pdf) {
         var info = document.getElementById("loadingInfo")
         if (info !== null) {
           info.style.display = 'none';
