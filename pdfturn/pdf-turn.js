@@ -10,15 +10,16 @@
   // pdfjsLib.GlobalWorkerOptions.workerSrc =
   //   "../build/pdf.worker.js";
 
+  var pdf = document.getElementById('#viewer');
   document.addEventListener("webviewerloaded", function() {
     PDFViewerApplication.initializedPromise.then(function() {
       console.log("It's webviewerloaded")
       // Create the event bus instance for the viewer application.
-      const eventBus = new PDFViewerApplication.EventBus();
+      // const eventBus = new PDFViewerApplication.EventBus();
 
       // Pass the event bus instance to the PDF viewer.
-      const pdfViewer = new PDFViewerApplication.PDFViewer({
-        eventBus: eventBus,
+      const pdfViewer = new pdf.PDFViewer({
+        eventBus: PDFViewerApplication.EventBus(),
       });
       eventBus.on('baseviewerinit', () => {
         console.log("It's on baseviewerinit");
