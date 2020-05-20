@@ -265,29 +265,29 @@
 
   function loadingInfo(doc) {
     var loadingTask = pdfjsLib.getDocument(doc);
-    loadingTask.promise.then(function(pdf) {
+    loadingTask.promise.then(pdf => {
       var info = document.getElementById("loadingInfo")
       if (info !== null) {
         info.style.display = 'none';
       }
-      pdf.addEventListener('baseviewerinit', () => {
+      pdf.PDFViewer.on('baseviewerinit', () => {
         console.log("It's on baseviewerinit");
         PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
-        
+
         bookFlip._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
         bookFlip._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
       });
-      pdf.addEventListener('scrollmodechanged', () => {
+      pdf.PDFViewer.on('scrollmodechanged', () => {
         console.log("It's on scrollmodechanged");
         var scroll = PDFViewerApplication.pdfViewer.scrollMode;
         console.log(scroll);
         if (scroll === 3) bookFlip.start();
         else bookFlip.stop();
       });
-        
+
     });
   }
-  window.onload = function() {
+  window.onload = () => {
     //window.location.search - https://css-tricks.com/snippets/javascript/get-url-and-url-parts-in-javascript/
     if (window.location.search == '') {
       loadingInfo('document.pdf')
@@ -297,3 +297,11 @@
       loadingInfo(doc)
     }
   }
+
+  // let pdfInstance = null;
+
+  // window.initPDFViewer = function(pdfURL) {
+  //   pdfjsLib.getDocument(pdfURL).then(pdf => {
+  //     pdfInstance = pdf;
+  //   });
+  // };
