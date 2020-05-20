@@ -17,12 +17,13 @@
       if (info !== null) {
         info.style.display = 'none';
       }
-      if (PDFViewerApplication.eventBus._listeners == 'baseviewerinit') {
+      pdf.eventBus.on('baseviewerinit', () => {
         console.log("It's on baseviewerinit");
         PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
-        this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
-        this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
-      }
+
+        pdf._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
+        pdf._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
+      });
     });
   }
   window.onload = function() {
