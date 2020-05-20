@@ -30,7 +30,7 @@
 
       //---- Coded by Shen Yang ----------------------------------//
       //---- See: https://github.com/mozilla/pdf.js/wiki/Third-party-viewer-usage ----------------------------------//
-      this.eventBus.dispatch('localized');
+      PDFViewerApplication.eventBus.dispatch('localized');
       // document.addEventListener("webviewerloaded", function() {
       //   PDFViewerApplication.initializedPromise.then(function() {
       //   })
