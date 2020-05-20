@@ -4,6 +4,11 @@
   /// requires jquery and turnjs
   /// all code added in viewer.js (from pdfjs build) in order to support 
   /// flipbook is commented with '$FB:' string to allow to find it easilly 
+  
+  // "use strict";
+
+  // pdfjsLib.GlobalWorkerOptions.workerSrc =
+  //   "../build/pdf.worker.js";
 
   var bookFlip = {
     _width: [], //flipbook pages width
@@ -27,31 +32,37 @@
       //---- See: https://github.com/mozilla/pdf.js/wiki/Third-party-viewer-usage ----------------------------------//
       // Create the event bus instance for the viewer application.
       const eventBus = new pdfjsViewer.EventBus();
+      
+      // document.addEventListener("webviewerloaded", function() {
+      //   PDFViewerApplication.initializedPromise.then(function() {
+      //     // The viewer has now been initialized.
+      //   })
+      // });
 
       // Pass the event bus instance to the PDF viewer.
       const pdfViewer = new pdfjsViewer.PDFViewer({
         eventBus: eventBus,
       });
 
-      // Change the original code '$(document)' to 'eventBus'
-      eventBus.on('rotationchanging', () => {
+      // Change the original code '$(document)' to 'pdfViewer'
+      pdfViewer.on('rotationchanging', () => {
         this.rotate()
       });
-      eventBus.on('scalechanging', () => {
+      pdfViewer.on('scalechanging', () => {
         this.resize()
       });
-      eventBus.on('pagechanging', () => {
+      pdfViewer.on('pagechanging', () => {
         this.flip()
       });
 
-      eventBus.on('documentinit', () => {
+      pdfViewer.on('documentinit', () => {
         console.log("It's on documentinit");
         this.stop();
         console.log("It's documentinit and bookFlip stop");
         this._ready = false;
       });
 
-      eventBus.on('scrollmodechanged', () => {
+      pdfViewer.on('scrollmodechanged', () => {
         console.log("It's on scrollmodechanged");
         var scroll = PDFViewerApplication.pdfViewer.scrollMode;
         console.log(scroll);
@@ -61,7 +72,7 @@
         button.classList.toggle('toggled', scroll === 3);
       });
 
-      eventBus.on('switchspreadmode', (evt) => {
+      pdfViewer.on('switchspreadmode', (evt) => {
         console.log("It's on switchspreadmode");
         this.spread(evt.originalEvent.detail.mode);
         PDFViewerApplication.eventBus.dispatch('spreadmodechanged', {
@@ -70,7 +81,7 @@
         });
       });
 
-      eventBus.on('pagesloaded', () => {
+      pdfViewer.on('pagesloaded', () => {
         console.log("It's on pagesloaded");
         this._ready = true;
         if (this.toStart) {
@@ -79,7 +90,7 @@
         }
       });
 
-      eventBus.on('baseviewerinit', () => {
+      pdfViewer.on('baseviewerinit', () => {
         console.log("It's on baseviewerinit");
         PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
 
