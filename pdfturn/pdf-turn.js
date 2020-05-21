@@ -182,7 +182,7 @@
           viewer._getVisiblePages = this._visPages;
 
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
-          viewer.spreadMode = this._spreadBk;
+          // viewer.spreadMode = this._spreadBk;
           PDFViewerApplication.open();
 
           $('#viewer .page').removeAttr('style');
