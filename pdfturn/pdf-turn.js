@@ -60,12 +60,12 @@
             this.flip()
           });
 
-          PDFViewerApplication.eventBus._on('documentinit', () => {
-            console.log("It's on documentinit");
-            this.stop();
-            console.log("It's documentinit and bookFlip stop");
-            this._ready = false;
-          });
+          // PDFViewerApplication.eventBus._on('documentinit', () => {
+          //   console.log("It's on documentinit");
+          //   this.stop();
+          //   console.log("It's documentinit and bookFlip stop");
+          //   this._ready = false;
+          // });
 
           PDFViewerApplication.eventBus._on('scrollmodechanged', () => {
             console.log("It's on scrollmodechanged");
@@ -123,7 +123,6 @@
           viewer._spreadMode = -1;
           // $('.spreadModeButtons').removeClass('toggled');
           // $('#' + selected).addClass('toggled');
-          console.log("It's button toggled");
 
           this._evSpread = PDFViewerApplication.eventBus._listeners.switchspreadmode;
           PDFViewerApplication.eventBus._listeners.switchspreadmode = null;
@@ -146,7 +145,7 @@
             opacity: 1
           });;
 
-          $('#spreadOdd').prop('disabled', true);
+          // $('#spreadOdd').prop('disabled', true);
           var pages = PDFViewerApplication.pagesCount;
           console.log("It's flipbook pagesCount: " + pages);
           for (var page = 3; page < pages + (pages % 2); page++) {
@@ -198,16 +197,6 @@
             $(this).css('width', parent._size(page, 'width')).css('height', parent._size(page, 'height'));
           });
 
-        },
-        // pdf loaded
-        loadingInfo: function(doc) {
-          var loadingTask = pdfjsLib.getDocument(doc);
-          loadingTask.promise.then(function(pdf) {
-            var info = document.getElementById("loadingInfo")
-            if (info !== null) {
-              info.style.display = 'none';
-            }
-          });
         },
         // resize flipbook pages
         resize: function() {

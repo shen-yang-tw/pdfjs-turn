@@ -13509,8 +13509,10 @@ var SecondaryToolbar = /*#__PURE__*/function () {
         buttons.scrollWrappedButton.classList.toggle("toggled", mode === _ui_utils.ScrollMode.WRAPPED);
         buttons.scrollBookFlipButton.classList.toggle("toggled", mode === _ui_utils.ScrollMode.FLIP);
         var isScrollModeHorizontal = mode === _ui_utils.ScrollMode.HORIZONTAL;
+        var isScrollModeFlip = mode === _ui_utils.ScrollMode.FLIP;
         buttons.spreadNoneButton.disabled = isScrollModeHorizontal;
         buttons.spreadOddButton.disabled = isScrollModeHorizontal;
+        buttons.spreadOddButton.disabled = isScrollModeFlip;
         buttons.spreadEvenButton.disabled = isScrollModeHorizontal;
       }
 
