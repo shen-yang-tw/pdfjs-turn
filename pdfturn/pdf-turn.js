@@ -106,7 +106,6 @@
         },
         // startup flipbook
         start: function() {
-          // $('#viewer').removeClass('pdfViewer').addClass('bookViewer');
           console.log("It's flipbook start");
 
           if (this.active || !this._ready) return;
@@ -114,15 +113,10 @@
 
           var viewer = PDFViewerApplication.pdfViewer;
 
-          // $('.scrollModeButtons').removeClass('toggled');
-
           this._spreadBk = viewer.spreadMode;
-          // var selected = $('.spreadModeButtons.toggled').attr('id');
           this._spread = (this._spreadBk !== 2) ? 0 : 2;
           viewer.spreadMode = 0;
           viewer._spreadMode = -1;
-          // $('.spreadModeButtons').removeClass('toggled');
-          // $('#' + selected).addClass('toggled');
 
           this._evSpread = PDFViewerApplication.eventBus._listeners.switchspreadmode;
           PDFViewerApplication.eventBus._listeners.switchspreadmode = null;
@@ -145,7 +139,6 @@
             opacity: 1
           });;
 
-          // $('#spreadOdd').prop('disabled', true);
           var pages = PDFViewerApplication.pagesCount;
           console.log("It's flipbook pagesCount: " + pages);
           for (var page = 3; page < pages + (pages % 2); page++) {
@@ -181,8 +174,15 @@
 
           $('#viewer').turn('destroy');
 
-          viewer.scrollPageIntoView = this._intoView;
-          viewer._getVisiblePages = this._visPages;
+          // viewer.scrollPageIntoView = this._intoView;
+          // viewer._getVisiblePages = this._visPages;
+
+          viewer.scrollPageIntoView = (data) => {
+            return this.link(data)
+          };
+          viewer._getVisiblePages = () => {
+            return this.load()
+          };
 
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
           viewer.spreadMode = this._spreadBk;
