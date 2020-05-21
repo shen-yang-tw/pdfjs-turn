@@ -185,9 +185,8 @@
           viewer._getVisiblePages = this._visPages;
 
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
-          viewer.spreadMode = this._spreadBk;
-          // viewer.spreadMode = 0;
-          PDFViewerApplication.open()
+          // viewer.spreadMode = this._spreadBk;
+          viewer.spreadMode = 0;
 
           $('#viewer .page').removeAttr('style');
           $('#viewer').removeAttr('style').removeClass('shadow bookViewer').addClass('pdfViewer');
