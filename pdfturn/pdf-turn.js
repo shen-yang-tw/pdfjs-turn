@@ -174,19 +174,11 @@
 
           $('#viewer').turn('destroy');
 
-          // viewer.scrollPageIntoView = this._intoView;
-          // viewer._getVisiblePages = this._visPages;
-
-          viewer.scrollPageIntoView = (data) => {
-            return this.link(data)
-          };
-          viewer._getVisiblePages = () => {
-            return this.load()
-          };
+          viewer.scrollPageIntoView = this._intoView;
+          viewer._getVisiblePages = this._visPages;
 
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
-          // viewer.spreadMode = this._spreadBk;
-          // viewer.spreadMode = 0;
+          viewer.spreadMode = this._spreadBk;
 
           $('#viewer .page').removeAttr('style');
           $('#viewer').removeAttr('style').removeClass('shadow bookViewer').addClass('pdfViewer');
