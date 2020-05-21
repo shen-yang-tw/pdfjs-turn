@@ -106,7 +106,7 @@
         },
         // startup flipbook
         start: function() {
-          $('#viewer').removeClass('pdfViewer').addClass('bookViewer');
+          // $('#viewer').removeClass('pdfViewer').addClass('bookViewer');
           console.log("It's flipbook start");
 
           if (this.active || !this._ready) return;
@@ -142,12 +142,13 @@
             parent._height[$(this).attr('data-page-number')] = $(this).height() / scale;
           });
 
-          // $('#viewer').removeClass('pdfViewer').addClass('bookViewer').css({
-          //   opacity: 1
-          // });;
+          $('#viewer').removeClass('pdfViewer').addClass('bookViewer').css({
+            opacity: 1
+          });;
 
           $('#spreadOdd').prop('disabled', true);
           var pages = PDFViewerApplication.pagesCount;
+          console.log("It's flipbook pagesCount: " + pages);
           for (var page = 3; page < pages + (pages % 2); page++) {
             if (this._height[page] != this._height[page - 1] || this._width[page] != this._width[page - 1]) {
               $('#spreadEven').prop('disabled', true);
@@ -167,8 +168,9 @@
               }
             },
             display: this._spreadType()
-          }, console.log("It's turn"));
-          console.log("It's flipbook start end");
+          });
+           console.log("It's turn")
+          console.log("It's flipbook start end")
         },
         // shutdown flipbook
         stop: function() {
