@@ -114,15 +114,15 @@
 
           var viewer = PDFViewerApplication.pdfViewer;
 
-          $('.scrollModeButtons').removeClass('toggled');
+          // $('.scrollModeButtons').removeClass('toggled');
 
           this._spreadBk = viewer.spreadMode;
-          var selected = $('.spreadModeButtons.toggled').attr('id');
+          // var selected = $('.spreadModeButtons.toggled').attr('id');
           this._spread = (this._spreadBk !== 2) ? 0 : 2;
           viewer.spreadMode = 0;
           viewer._spreadMode = -1;
-          $('.spreadModeButtons').removeClass('toggled');
-          $('#' + selected).addClass('toggled');
+          // $('.spreadModeButtons').removeClass('toggled');
+          // $('#' + selected).addClass('toggled');
           console.log("It's button toggled");
 
           this._evSpread = PDFViewerApplication.eventBus._listeners.switchspreadmode;
