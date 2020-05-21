@@ -71,11 +71,8 @@
             console.log("It's on scrollmodechanged");
             var scroll = PDFViewerApplication.pdfViewer.scrollMode;
             console.log(scroll);
-            if (scroll === 3) {
-              this.start();
-              this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
-              this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
-            } else this.stop();
+            if (scroll === 3) this.start();
+            else this.stop();
             // var button = PDFViewerApplication.appConfig.secondaryToolbar.scrollBookFlipButton;
             // button.classList.toggle('toggled', scroll === 3);
           });
@@ -168,7 +165,7 @@
             },
             display: this._spreadType()
           });
-          console.log("It's turn")
+           console.log("It's turn")
           console.log("It's flipbook start end")
         },
         // shutdown flipbook
@@ -185,8 +182,7 @@
           viewer._getVisiblePages = this._visPages;
 
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
-          // viewer.spreadMode = this._spreadBk;
-          viewer.spreadMode = 0;
+          viewer.spreadMode = this._spreadBk;
 
           $('#viewer .page').removeAttr('style');
           $('#viewer').removeAttr('style').removeClass('shadow bookViewer').addClass('pdfViewer');
