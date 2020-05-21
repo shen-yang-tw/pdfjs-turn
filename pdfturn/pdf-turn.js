@@ -93,15 +93,19 @@
               this.toStart = false;
               PDFViewerApplication.pdfViewer.scrollMode = 3;
             }
-          });
-
-          PDFViewerApplication.eventBus._on('baseviewerinit', () => {
-            console.log("It's on baseviewerinit");
             PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
-
+            this.start();
             this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
             this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
           });
+
+          // PDFViewerApplication.eventBus._on('baseviewerinit', () => {
+          //   console.log("It's on baseviewerinit");
+          //   PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
+
+          //   this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
+          //   this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
+          // });
 
         },
         // startup flipbook
