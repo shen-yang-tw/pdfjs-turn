@@ -17,6 +17,7 @@
   //   })
   // });
 
+  //---- Coded by Shen Yang ----------------------------------//
   function loadingInfo(doc) {
     var loadingTask = pdfjsLib.getDocument(doc);
     loadingTask.promise.then(pdf => {
@@ -31,7 +32,7 @@
       //   if (scroll === 3) bookFlip.start();
       //   else bookFlip.stop();
       // }
-      
+
       var bookFlip = {
         _width: [], //flipbook pages width
         _height: [], //flipbook pages height
@@ -48,29 +49,25 @@
         // event listeners when bookFlip need different handling 
         init: function() {
           console.log("It's bookFlip init");
-          $('#viewer').addClass('bookViewer');
 
-          //---- Coded by Shen Yang ----------------------------------//
-          //---- See: https://github.com/mozilla/pdf.js/wiki/Third-party-viewer-usage ----------------------------------//
-
-          $(document).on('rotationchanging', () => {
+          $(document)._on('rotationchanging', () => {
             this.rotate()
           });
-          $(document).on('scalechanging', () => {
+          $(document)._on('scalechanging', () => {
             this.resize()
           });
-          $(document).on('pagechanging', () => {
+          $(document)._on('pagechanging', () => {
             this.flip()
           });
 
-          $(document).on('documentinit', () => {
+          $(document)._on('documentinit', () => {
             console.log("It's on documentinit");
             this.stop();
             console.log("It's documentinit and bookFlip stop");
             this._ready = false;
           });
 
-          $(document).on('scrollmodechanged', () => {
+          $(document)._on('scrollmodechanged', () => {
             console.log("It's on scrollmodechanged");
             var scroll = PDFViewerApplication.pdfViewer.scrollMode;
             console.log(scroll);
@@ -80,7 +77,7 @@
             // button.classList.toggle('toggled', scroll === 3);
           });
 
-          $(document).on('switchspreadmode', (evt) => {
+          $(document)._on('switchspreadmode', (evt) => {
             console.log("It's on switchspreadmode");
             this.spread(evt.originalEvent.detail.mode);
             PDFViewerApplication.eventBus.dispatch('spreadmodechanged', {
@@ -89,7 +86,7 @@
             });
           });
 
-          $(document).on('pagesloaded', () => {
+          $(document)._on('pagesloaded', () => {
             console.log("It's on pagesloaded");
             this._ready = true;
             if (this.toStart) {
@@ -98,7 +95,7 @@
             }
           });
 
-          $(document).on('baseviewerinit', () => {
+          $(document)._on('baseviewerinit', () => {
             console.log("It's on baseviewerinit");
             PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
 
