@@ -86,7 +86,7 @@
             });
           });
 
-          PDFViewerApplication.eventBus._on('pagesloaded', () => {
+          PDFViewerApplication.eventBus._on('pagesinit', () => {
             console.log("It's on pagesloaded");
             this._ready = true;
             if (this.toStart) {
@@ -99,8 +99,8 @@
             this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
           });
 
-          // PDFViewerApplication.eventBus._on('baseviewerinit', () => {
-          //   console.log("It's on baseviewerinit");
+          // PDFViewerApplication.eventBus._on('pagesinit', () => {
+          //   console.log("It's on pagesinit");
           //   PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
 
           //   this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
