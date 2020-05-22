@@ -100,7 +100,8 @@
             this._ready = true;
             if(this.toStart){
               this.toStart = false;
-              PDFViewerApplication.pdfViewer.scrollMode = 3;
+              // PDFViewerApplication.pdfViewer.scrollMode = 3;
+              PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
             }
             // this.active = true;
             // PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
