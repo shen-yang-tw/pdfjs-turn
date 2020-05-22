@@ -200,9 +200,17 @@
           viewer._getVisiblePages = this._visPages;
 
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
+          PDFViewerApplication.forceRendering();
           // viewer.spreadMode = this._spreadBk;
           // viewer.spreadMode = viewer.stored.spreadMode;
 
+        },
+        render: function (num) {
+          if (pageRendering) {
+            pageNumPending = num;
+          } else {
+            renderPage(num);
+          }
         },
         // resize flipbook pages
         resize: function() {
