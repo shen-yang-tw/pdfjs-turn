@@ -200,7 +200,7 @@
           viewer._getVisiblePages = this._visPages;
 
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
-          PDFViewerApplication.forceRendering();
+          viewer.forceRendering();
           // viewer.spreadMode = this._spreadBk;
           // viewer.spreadMode = viewer.stored.spreadMode;
 
