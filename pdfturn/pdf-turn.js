@@ -185,9 +185,17 @@
 
           $('#viewer').turn('destroy');
 
-          PDFViewerApplication.pdfViewer.scrollPageIntoView();
-          PDFViewerApplication.pdfViewer._getVisiblePages();
+          // PDFViewerApplication.pdfViewer.scrollPageIntoView();
+          // PDFViewerApplication.pdfViewer._getVisiblePages();
           
+          if (window.location.search == '') {
+            loadingInfo('document.pdf')
+          }
+          if (window.location.search.includes('loadingInfo')) {
+            doc = window.location.search.split('(').pop().split(')')[0]
+            loadingInfo(doc)
+          }
+      
           $('#viewer .page').removeAttr('style');
           $('#viewer').removeAttr('style').removeClass('shadow bookViewer').addClass('pdfViewer');
           console.log("It's stop and pdfViewer");
