@@ -201,7 +201,7 @@
 
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
           // viewer.spreadMode = this._spreadBk;
-          viewer.spreadMode = 0;
+          // viewer.spreadMode = viewer.stored.spreadMode;
 
         },
         // resize flipbook pages
