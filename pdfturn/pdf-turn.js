@@ -196,7 +196,7 @@
           });
 
           PDFViewerApplication.pdfViewer.scrollPageIntoView();
-          PDFViewerApplication.pdfViewer._getVisiblePages = this._visPages;
+          PDFViewerApplication.pdfViewer._getVisiblePages();
           // var viewer = PDFViewerApplication.pdfViewer;
           // viewer.scrollPageIntoView = this._intoView;
           // viewer._getVisiblePages = this._visPages;
