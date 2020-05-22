@@ -183,17 +183,7 @@
           if (this.active) return;
           // this.active = false;
 
-          var viewer = PDFViewerApplication.pdfViewer;
-
           $('#viewer').turn('destroy');
-
-          viewer.scrollPageIntoView = this._intoView;
-          viewer._getVisiblePages = this._visPages;
-
-          PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
-          // viewer.spreadMode = this._spreadBk;
-          viewer.spreadMode = 0;
-
 
           $('#viewer .page').removeAttr('style');
           $('#viewer').removeAttr('style').removeClass('shadow bookViewer').addClass('pdfViewer');
@@ -204,6 +194,14 @@
             var page = $(this).attr('data-page-number');
             $(this).css('width', parent._size(page, 'width')).css('height', parent._size(page, 'height'));
           });
+
+          var viewer = PDFViewerApplication.pdfViewer;
+          viewer.scrollPageIntoView = this._intoView;
+          viewer._getVisiblePages = this._visPages;
+
+          PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
+          // viewer.spreadMode = this._spreadBk;
+          viewer.spreadMode = 0;
 
         },
         // resize flipbook pages
