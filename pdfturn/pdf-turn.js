@@ -43,8 +43,7 @@
         // toStart: false, //PDFjs require flipbook at start
         _intoView: null, //link handler default function
         _visPages: null, //visible pages function
-        // _ready: false, //ready to start flipbook
-        // loadingTask: pdfjsLib.getDocument(doc),
+        _ready: false, //ready to start flipbook
 
         // event listeners when bookFlip need different handling 
         init: function() {
@@ -60,26 +59,29 @@
             this.flip()
           });
 
-          // PDFViewerApplication.eventBus._on('documentinit', () => {
-          //   console.log("It's on documentinit");
-          //   this.stop();
-          //   console.log("It's documentinit and bookFlip stop");
-          //   this._ready = false;
-          // });
+          PDFViewerApplication.eventBus._on('documentinit', () => {
+            console.log("It's on documentinit");
+            this.stop();
+            console.log("It's documentinit and bookFlip stop");
+            this._ready = false;
+          });
 
           PDFViewerApplication.eventBus._on('scrollmodechanged', () => {
             console.log("It's on scrollmodechanged");
             var scroll = PDFViewerApplication.pdfViewer.scrollMode;
+
             console.log(scroll);
-            if (scroll === 3) {
-              // this._ready = true;
-              this.active = true;
-              this.start();
-            } else {
-              // this._ready = false;
-              this.active = false;
-              this.stop();
-            }
+            if (scroll === 3) this.start();
+            else this.stop();
+            // if (scroll === 3) {
+            //   // this._ready = true;
+            //   this.active = true;
+            //   this.start();
+            // } else {
+            //   // this._ready = false;
+            //   this.active = false;
+            //   this.stop();
+            // }
             // var button = PDFViewerApplication.appConfig.secondaryToolbar.scrollBookFlipButton;
             // button.classList.toggle('toggled', scroll === 3);
           });
@@ -95,33 +97,33 @@
 
           PDFViewerApplication.eventBus._on('pagesinit', () => {
             console.log("It's on pagesloaded");
-            // this._ready = true;
-            this.active = true;
-            // if (this.toStart) {
-            //   this.toStart = false;
-            //   PDFViewerApplication.pdfViewer.scrollMode = 3;
-            // }
-            PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
-            this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
-            this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
-            this.start();
+            this._ready = true;
+            if(this.toStart){
+              this.toStart = false;
+              PDFViewerApplication.pdfViewer.scrollMode = 3;
+            }
+            // this.active = true;
+            // PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
+            // this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
+            // this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
+            // this.start();
           });
 
-          // PDFViewerApplication.eventBus._on('pagesinit', () => {
-          //   console.log("It's on pagesinit");
-          //   PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
+          PDFViewerApplication.eventBus._on('baseviewerinit', () => {
+            console.log("It's on pagesinit");
+            PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
 
-          //   this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
-          //   this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
-          // });
+            this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
+            this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
+          });
 
         },
         // startup flipbook
         start: function() {
           console.log("It's flipbook start");
 
-          if (!this.active) return;
-          // this.active = false;
+          if (this.active || !this._ready) return;
+          this.active = true;
 
           var viewer = PDFViewerApplication.pdfViewer;
 
@@ -180,11 +182,11 @@
         // shutdown flipbook
         stop: function() {
           console.log("It's flipbook stop");
-          if (this.active) return;
-          // this.active = false;
+          if (!this.active) return;
+          this.active = false;
 
           $('#viewer').turn('destroy');
-                
+
           $('#viewer .page').removeAttr('style');
           $('#viewer').removeAttr('style').removeClass('shadow bookViewer').addClass('pdfViewer');
 
@@ -200,11 +202,11 @@
 
           // viewer.scrollPageIntoView = this._intoView;
           // viewer._getVisiblePages = this._visPages;
-          
+
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
           viewer.spreadMode = this._spreadBk;
           // viewer.spreadMode = viewer.stored.spreadMode;
-          
+
           console.log("It's stop and pdfViewer");
         },
         // resize flipbook pages
