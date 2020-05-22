@@ -184,21 +184,19 @@
           // this.active = false;
 
           $('#viewer').turn('destroy');
+          var viewer = PDFViewerApplication.pdfViewer;
+          viewer.scrollPageIntoView();
+          viewer._getVisiblePages();
 
-          // PDFViewerApplication.pdfViewer.scrollPageIntoView();
-          // PDFViewerApplication.pdfViewer._getVisiblePages();
+          // viewer.scrollPageIntoView = this._intoView;
+          // viewer._getVisiblePages = this._visPages;
           
-          if (window.location.search == '') {
-            loadingInfo('document.pdf')
-          }
-          if (window.location.search.includes('loadingInfo')) {
-            doc = window.location.search.split('(').pop().split(')')[0]
-            loadingInfo(doc)
-          }
-      
+          PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
+          // viewer.spreadMode = this._spreadBk;
+          viewer.spreadMode = viewer.stored.spreadMode;
+                
           $('#viewer .page').removeAttr('style');
           $('#viewer').removeAttr('style').removeClass('shadow bookViewer').addClass('pdfViewer');
-          console.log("It's stop and pdfViewer");
 
           var parent = this;
           $('#viewer .page').each(function() {
@@ -206,15 +204,7 @@
             $(this).css('width', parent._size(page, 'width')).css('height', parent._size(page, 'height'));
           });
 
-          // var viewer = PDFViewerApplication.pdfViewer;
-          // viewer.scrollPageIntoView = this._intoView;
-          // viewer._getVisiblePages = this._visPages;
-
-          // PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
-          // viewer.forceRendering();
-          // viewer.spreadMode = this._spreadBk;
-          // viewer.spreadMode = viewer.stored.spreadMode;
-
+          console.log("It's stop and pdfViewer");
         },
         // resize flipbook pages
         resize: function() {
