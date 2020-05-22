@@ -195,9 +195,9 @@
             $(this).css('width', parent._size(page, 'width')).css('height', parent._size(page, 'height'));
           });
 
-          var viewer = PDFViewerApplication.pdfViewer;
-          viewer.scrollPageIntoView = this._intoView;
-          viewer._getVisiblePages = this._visPages;
+          // var viewer = PDFViewerApplication.pdfViewer;
+          // viewer.scrollPageIntoView = this._intoView;
+          // viewer._getVisiblePages = this._visPages;
 
           // PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
           // viewer.forceRendering();
