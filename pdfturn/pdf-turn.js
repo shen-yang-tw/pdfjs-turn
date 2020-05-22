@@ -104,8 +104,8 @@
               // PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
             }
             PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
-            // this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
-            // this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
+            this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
+            this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
             this.start();
           });
 
