@@ -40,10 +40,10 @@
         _spreadBk: NaN, //spread mode backup to restore
         _evSpread: null, //spread mode changed default event handler 
         _spread: NaN, //spread page mode
-        toStart: false, //PDFjs require flipbook at start
+        // toStart: false, //PDFjs require flipbook at start
         _intoView: null, //link handler default function
         _visPages: null, //visible pages function
-        _ready: false, //ready to start flipbook
+        // _ready: false, //ready to start flipbook
         // loadingTask: pdfjsLib.getDocument(doc),
 
         // event listeners when bookFlip need different handling 
@@ -72,8 +72,14 @@
             var scroll = PDFViewerApplication.pdfViewer.scrollMode;
             console.log(scroll);
             if (scroll === 3) {
+              // this._ready = true;
+              this.active = true;
               this.start();
-            } else this.stop();
+            } else {
+              // this._ready = false;
+              this.active = false;
+              this.stop();
+            }
             // var button = PDFViewerApplication.appConfig.secondaryToolbar.scrollBookFlipButton;
             // button.classList.toggle('toggled', scroll === 3);
           });
@@ -89,15 +95,16 @@
 
           PDFViewerApplication.eventBus._on('pagesinit', () => {
             console.log("It's on pagesloaded");
-            this._ready = true;
-            if (this.toStart) {
-              this.toStart = false;
-              PDFViewerApplication.pdfViewer.scrollMode = 3;
-            }
+            // this._ready = true;
+            this.active = true;
+            // if (this.toStart) {
+            //   this.toStart = false;
+            //   PDFViewerApplication.pdfViewer.scrollMode = 3;
+            // }
             PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
-            this.start();
             this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
             this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
+            this.start();
           });
 
           // PDFViewerApplication.eventBus._on('pagesinit', () => {
@@ -113,8 +120,8 @@
         start: function() {
           console.log("It's flipbook start");
 
-          if (this.active || !this._ready) return;
-          this.active = true;
+          if (!this.active) return;
+          // this.active = false;
 
           var viewer = PDFViewerApplication.pdfViewer;
 
@@ -173,8 +180,8 @@
         // shutdown flipbook
         stop: function() {
           console.log("It's flipbook stop");
-          if (!this.active) return;
-          this.active = false;
+          if (this.active) return;
+          // this.active = false;
 
           var viewer = PDFViewerApplication.pdfViewer;
 
