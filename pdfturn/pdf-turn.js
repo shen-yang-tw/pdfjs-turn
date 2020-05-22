@@ -205,13 +205,6 @@
           // viewer.spreadMode = viewer.stored.spreadMode;
 
         },
-        render: function (num) {
-          if (pageRendering) {
-            pageNumPending = num;
-          } else {
-            renderPage(num);
-          }
-        },
         // resize flipbook pages
         resize: function() {
           if (!this.active) return;
