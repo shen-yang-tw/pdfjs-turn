@@ -100,14 +100,13 @@
             this._ready = true;
             if(this.toStart){
               this.toStart = false;
-              // PDFViewerApplication.pdfViewer.scrollMode = 3;
-              PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
+              PDFViewerApplication.pdfViewer.scrollMode = 3;
+              // PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
             }
-            // this.active = true;
-            // PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
+            PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
             // this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
             // this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
-            // this.start();
+            this.start();
           });
 
           PDFViewerApplication.eventBus._on('baseviewerinit', () => {
