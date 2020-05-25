@@ -200,7 +200,7 @@
           // viewer._getVisiblePages();
           // viewer.scrollPageIntoView();
           // viewer.getVisibleElements();
-          PDFSinglePageViewer();
+          PDFViewerApplication.PDFSinglePageViewer();
 
 
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
