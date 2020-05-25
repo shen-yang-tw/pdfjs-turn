@@ -195,7 +195,7 @@
           });
 
           var viewer = PDFViewerApplication.pdfViewer;
-          // viewer.scrollPageIntoView();
+          viewer.scrollPageIntoView();
           // viewer._getCurrentVisiblePage();
           // viewer._getVisiblePages();
           // viewer.getPagesOverview();
