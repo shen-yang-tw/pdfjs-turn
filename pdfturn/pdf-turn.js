@@ -111,7 +111,7 @@
             // this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
             // this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
           });
-          
+
           this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
           this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
       
@@ -216,6 +216,13 @@
           viewer._getVisiblePages = () => {
             return this.load()
           };
+          var scale = viewer.currentScale;
+          var parent = this;
+          $('#viewer .page').each(function() {
+            parent._width[$(this).attr('data-page-number')] = $(this).width() / scale;
+            parent._height[$(this).attr('data-page-number')] = $(this).height() / scale;
+          });
+          
           console.log("It's _getVisiblePages");
 
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
