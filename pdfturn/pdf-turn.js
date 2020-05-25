@@ -83,6 +83,8 @@
               // this._ready = false;
               this.active = false;
               this.stop();
+              this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
+              this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
             }
           });
 
@@ -98,11 +100,7 @@
           PDFViewerApplication.eventBus._on('pagesinit', () => {
             console.log("It's on pagesinit");
             this._ready = true;
-            // if(this.toStart){
-            //   this.toStart = false;
-            //   PDFViewerApplication.pdfViewer.scrollMode = 3;
-            //   // PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
-            // }
+
             PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
             this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
             this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
@@ -122,6 +120,7 @@
           console.log("It's flipbook start");
 
           if (!this.active) return;
+          // this.init().PDFViewerApplication.eventBus._on('pagesinit');
 
           var viewer = PDFViewerApplication.pdfViewer;
 
@@ -195,12 +194,12 @@
           });
 
           var viewer = PDFViewerApplication.pdfViewer;
-          // viewer._getVisiblePages = this._visPages;
-          // viewer.scrollPageIntoView = this._intoView;
+          viewer._getVisiblePages = this._visPages;
+          viewer.scrollPageIntoView = this._intoView;
           // viewer._getVisiblePages();
           // viewer.scrollPageIntoView();
           // viewer.getVisibleElements();
-          viewer.getPageView();
+          // viewer.getPageView();
 
 
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
