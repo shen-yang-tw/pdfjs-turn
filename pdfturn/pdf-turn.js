@@ -199,8 +199,7 @@
           viewer._getVisiblePages = this._visPages;
           viewer.scrollPageIntoView();
           viewer._getVisiblePages();
-          // viewer._forceRendering();
-          // viewer._onePageRenderedOrForceFetch();
+          // viewer.getVisibleElements();
 
 
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
