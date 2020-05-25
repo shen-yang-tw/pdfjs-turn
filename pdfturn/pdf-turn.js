@@ -205,6 +205,14 @@
           });
 
           var viewer = PDFViewerApplication.pdfViewer;
+          this._spreadBk = viewer.spreadMode;
+          this._spread = (this._spreadBk !== 2) ? 0 : 2;
+          viewer.spreadMode = 0;
+          viewer._spreadMode = -1;
+
+          this._evSpread = PDFViewerApplication.eventBus._listeners.switchspreadmode;
+          PDFViewerApplication.eventBus._listeners.switchspreadmode = null;
+          
           viewer._getVisiblePages = this._visPages;
           viewer.scrollPageIntoView = this._intoView;
           // viewer._getVisiblePages();
@@ -217,7 +225,7 @@
           viewer._getVisiblePages = () => {
             return this.load()
           };
-
+          console.log("It's _getVisiblePages");
 
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
           // this.setInitialView();
