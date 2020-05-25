@@ -195,10 +195,10 @@
           });
 
           var viewer = PDFViewerApplication.pdfViewer;
-          viewer._getVisiblePages = this._visPages;
-          viewer.scrollPageIntoView = this._intoView;
-          // viewer._getVisiblePages();
-          // viewer.scrollPageIntoView();
+          // viewer._getVisiblePages = this._visPages;
+          // viewer.scrollPageIntoView = this._intoView;
+          viewer._getVisiblePages();
+          viewer.scrollPageIntoView();
           // viewer.getVisibleElements();
 
 
