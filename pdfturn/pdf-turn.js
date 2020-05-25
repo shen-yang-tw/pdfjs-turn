@@ -203,12 +203,7 @@
           // viewer._getVisiblePages = this._visPages;
 
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
-          this.setInitialView(document.location.hash.substring(1), {
-            rotation: rotation,
-            sidebarView: sidebarView,
-            scrollMode: scrollMode,
-            spreadMode: spreadMode
-          });
+          this.setInitialView();
           // viewer.spreadMode = stored.spreadMode | 0;
           // viewer.spreadMode = viewer.stored.spreadMode;
 
