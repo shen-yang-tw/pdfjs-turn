@@ -192,14 +192,6 @@
           console.log("It's flipbook stop");
           if (this.active) return;
           // this.active = false;
-
-          if (window.location.search == '') {
-            this.loading('document.pdf')
-          }
-          if (window.location.search.includes('loadingInfo')) {
-            doc = window.location.search.split('(').pop().split(')')[0]
-            this.loading(doc)
-          }
                 
           $('#viewer').turn('destroy');
 
@@ -219,6 +211,12 @@
           // viewer.scrollPageIntoView();
           // viewer.getVisibleElements();
           // viewer.getPageView();
+          viewer.scrollPageIntoView = (data) => {
+            return this.link(data)
+          };
+          viewer._getVisiblePages = () => {
+            return this.load()
+          };
 
 
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
