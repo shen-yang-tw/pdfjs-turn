@@ -203,7 +203,7 @@
 
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
           // this.setInitialView();
-          viewer.spreadMode = stored.spreadMode | 0;
+          viewer.spreadMode = PDFViewerApplicationOptions.get("spreadModeOnLoad");
           // viewer.spreadMode = viewer.stored.spreadMode;
 
           console.log("It's stop and pdfViewer");
