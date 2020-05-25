@@ -201,7 +201,7 @@
           // viewer._getCurrentVisiblePage();
           // viewer._getVisiblePages();
           // viewer.getPagesOverview();
-          viewer.update();
+          // viewer.update();
 
 
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
