@@ -40,7 +40,7 @@
         _spreadBk: NaN, //spread mode backup to restore
         _evSpread: null, //spread mode changed default event handler 
         _spread: NaN, //spread page mode
-        toStart: false, //PDFjs require flipbook at start
+        // toStart: false, //PDFjs require flipbook at start
         _intoView: null, //link handler default function
         _visPages: null, //visible pages function
         _ready: false, //ready to start flipbook
@@ -59,12 +59,12 @@
             this.flip()
           });
 
-          PDFViewerApplication.eventBus._on('documentinit', () => {
-            console.log("It's on documentinit");
-            this.stop();
-            console.log("It's documentinit and bookFlip stop");
-            this._ready = false;
-          });
+          // PDFViewerApplication.eventBus._on('documentinit', () => {
+          //   console.log("It's on documentinit");
+          //   this.stop();
+          //   console.log("It's documentinit and bookFlip stop");
+          //   this._ready = false;
+          // });
 
           PDFViewerApplication.eventBus._on('scrollmodechanged', () => {
             console.log("It's on scrollmodechanged");
@@ -96,11 +96,12 @@
           PDFViewerApplication.eventBus._on('pagesinit', () => {
             console.log("It's on pagesinit");
             this._ready = true;
-            if(this.toStart){
-              this.toStart = false;
-              PDFViewerApplication.pdfViewer.scrollMode = 3;
-              // PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
-            }
+            // if(this.toStart){
+            //   this.toStart = false;
+            //   PDFViewerApplication.pdfViewer.scrollMode = 3;
+            //   // PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
+            // }
+            PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
           });
 
           PDFViewerApplication.eventBus._on('baseviewerinit', () => {

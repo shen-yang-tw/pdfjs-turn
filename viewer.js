@@ -1368,13 +1368,6 @@ var PDFViewerApplication = {
                     }
                   }
 
-                  //$FB: prevent start in bookflip mode
-                  if(scrollMode === _ui_utils.ScrollMode.FLIP) {
-                    scrollMode = _ui_utils.ScrollMode.VERTICAL;
-                    bookFlip.toStart = true;
-                    $('#viewer').css({ opacity: 0 });
-                  }
-                  
                   if (pageMode && sidebarView === _pdf_sidebar.SidebarView.UNKNOWN) {
                     sidebarView = apiPageModeToSidebarView(pageMode);
                   }
