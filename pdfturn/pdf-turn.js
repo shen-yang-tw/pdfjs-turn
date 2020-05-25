@@ -71,17 +71,17 @@
             var scroll = PDFViewerApplication.pdfViewer.scrollMode;
 
             console.log(scroll);
-            if (scroll === 3) this.start();
-            else this.stop();
-            // if (scroll === 3) {
-            //   // this._ready = true;
-            //   this.active = true;
-            //   this.start();
-            // } else {
-            //   // this._ready = false;
-            //   this.active = false;
-            //   this.stop();
-            // }
+            // if (scroll === 3) this.start();
+            // else this.stop();
+            if (scroll === 3) {
+              // this._rkeady = true;
+              // this.active = true;
+              this.start();
+            } else {
+              // this._ready = false;
+              // this.active = false;
+              this.stop();
+            }
           });
 
           PDFViewerApplication.eventBus._on('switchspreadmode', (evt) => {
