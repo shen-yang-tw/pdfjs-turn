@@ -102,6 +102,8 @@
             //   // PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
             // }
             PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
+            this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
+            this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
           });
 
           PDFViewerApplication.eventBus._on('baseviewerinit', () => {
@@ -144,10 +146,10 @@
             parent._height[$(this).attr('data-page-number')] = $(this).height() / scale;
           });
 
-          $('#viewer').removeClass('pdfViewer').addClass('bookViewer').css({
-            opacity: 1
-          });
-          // $('#viewer').removeClass('pdfViewer').addClass('bookViewer')
+          // $('#viewer').removeClass('pdfViewer').addClass('bookViewer').css({
+          //   opacity: 1
+          // });
+          $('#viewer').removeClass('pdfViewer').addClass('bookViewer')
 
           var pages = PDFViewerApplication.pagesCount;
           console.log("It's flipbook pagesCount: " + pages);
