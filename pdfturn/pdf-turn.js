@@ -43,7 +43,7 @@
         // toStart: false, //PDFjs require flipbook at start
         _intoView: null, //link handler default function
         _visPages: null, //visible pages function
-        _ready: false, //ready to start flipbook
+        // _ready: false, //ready to start flipbook
 
         // event listeners when bookFlip need different handling 
         init: function() {
@@ -74,14 +74,14 @@
             // if (scroll === 3) this.start();
             // else this.stop();
             if (scroll === 3) {
-              this._rkeady = true;
-              // this.active = true;
+              // this._rkeady = true;
+              this.active = true;
               this.start();
               this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
               this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
               } else {
-              this._ready = false;
-              // this.active = false;
+              // this._ready = false;
+              this.active = false;
               this.stop();
             }
           });
@@ -121,8 +121,7 @@
         start: function() {
           console.log("It's flipbook start");
 
-          if (this.active || !this._ready) return;
-          this.active = true;
+          if (!this.active) return;
 
           var viewer = PDFViewerApplication.pdfViewer;
 
@@ -181,8 +180,8 @@
         // shutdown flipbook
         stop: function() {
           console.log("It's flipbook stop");
-          if (!this.active) return;
-          this.active = false;
+          if (this.active) return;
+          // this.active = false;
 
           $('#viewer').turn('destroy');
 
