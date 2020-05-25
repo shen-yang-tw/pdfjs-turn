@@ -46,6 +46,17 @@
         // _ready: false, //ready to start flipbook
 
         // event listeners when bookFlip need different handling 
+        loading: function() {
+          var loadingTask = pdfjsLib.getDocument(doc);
+          loadingTask.promise.then(pdf => {
+            var info = document.getElementById("loadingInfo")
+            if (info !== null) {
+              info.style.display = 'none';
+            }
+          })
+        },
+
+        // event listeners when bookFlip need different handling 
         init: function() {
           console.log("It's bookFlip init");
 
@@ -182,6 +193,14 @@
           if (this.active) return;
           // this.active = false;
 
+          if (window.location.search == '') {
+            this.loading('document.pdf')
+          }
+          if (window.location.search.includes('loadingInfo')) {
+            doc = window.location.search.split('(').pop().split(')')[0]
+            this.loading(doc)
+          }
+                
           $('#viewer').turn('destroy');
 
           $('#viewer .page').removeAttr('style');
