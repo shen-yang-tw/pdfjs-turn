@@ -88,8 +88,6 @@
               // this._rkeady = true;
               this.active = true;
               this.start();
-              this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
-              this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
               } else {
               // this._ready = false;
               this.active = false;
@@ -108,14 +106,15 @@
 
           PDFViewerApplication.eventBus._on('pagesinit', () => {
             console.log("It's on pagesinit");
-            this.active = true;
-            this.start();
 
             PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
-            this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
-            this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
+            // this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
+            // this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
           });
-
+          
+          this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
+          this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
+      
           // PDFViewerApplication.eventBus._on('baseviewerinit', () => {
           //   console.log("It's on pagesinit");
           //   PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
