@@ -203,7 +203,7 @@
           // viewer._getVisiblePages = this._visPages;
 
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
-          this.setInitialView(hash, {
+          this.setInitialView(document.location.hash.substring(1), {
             rotation: rotation,
             sidebarView: sidebarView,
             scrollMode: scrollMode,
