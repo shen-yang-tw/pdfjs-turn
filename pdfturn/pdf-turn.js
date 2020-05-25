@@ -82,8 +82,6 @@
             //   this.active = false;
             //   this.stop();
             // }
-            // var button = PDFViewerApplication.appConfig.secondaryToolbar.scrollBookFlipButton;
-            // button.classList.toggle('toggled', scroll === 3);
           });
 
           PDFViewerApplication.eventBus._on('switchspreadmode', (evt) => {
@@ -96,17 +94,13 @@
           });
 
           PDFViewerApplication.eventBus._on('pagesinit', () => {
-            console.log("It's on pagesloaded");
+            console.log("It's on pagesinit");
             this._ready = true;
             if(this.toStart){
               this.toStart = false;
               PDFViewerApplication.pdfViewer.scrollMode = 3;
               // PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
             }
-            PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
-            this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
-            this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
-            this.start();
           });
 
           PDFViewerApplication.eventBus._on('baseviewerinit', () => {
