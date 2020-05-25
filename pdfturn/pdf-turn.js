@@ -40,7 +40,7 @@
         _spreadBk: NaN, //spread mode backup to restore
         _evSpread: null, //spread mode changed default event handler 
         _spread: NaN, //spread page mode
-        // toStart: false, //PDFjs require flipbook at start
+        toStart: false, //PDFjs require flipbook at start
         _intoView: null, //link handler default function
         _visPages: null, //visible pages function
         _ready: false, //ready to start flipbook

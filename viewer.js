@@ -1373,8 +1373,8 @@ var PDFViewerApplication = {
                     scrollMode = _ui_utils.ScrollMode.VERTICAL;
                     bookFlip.toStart = true;
                     $('#viewer').css({ opacity: 0 });
-                  }
-                  
+                  }TE
+
                   if (pageMode && sidebarView === _pdf_sidebar.SidebarView.UNKNOWN) {
                     sidebarView = apiPageModeToSidebarView(pageMode);
                   }
