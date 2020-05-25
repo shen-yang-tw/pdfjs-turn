@@ -74,10 +74,12 @@
             // if (scroll === 3) this.start();
             // else this.stop();
             if (scroll === 3) {
-              // this._rkeady = true;
+              this._rkeady = true;
               // this.active = true;
               this.start();
-            } else {
+              this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
+              this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
+              } else {
               // this._ready = false;
               // this.active = false;
               this.stop();
