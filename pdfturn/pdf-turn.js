@@ -84,8 +84,16 @@
 
             console.log(scroll);
             //--
-            if (scroll === 3) this.start();
-            else this.stop();
+            // if (scroll === 3) this.start();
+            // else this.stop();
+            if (scroll === 3) {
+              this._rkeady = true;
+              this.start();
+              } else {
+              // this._ready = false;
+              // this.active = false;
+              this.stop();
+            }
 
             //++
             // if (scroll === 3) {
