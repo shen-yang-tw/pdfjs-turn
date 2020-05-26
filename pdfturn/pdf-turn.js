@@ -115,6 +115,7 @@
           this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
           this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
       
+          console.log("It's on _getVisiblePages");
           // PDFViewerApplication.eventBus._on('baseviewerinit', () => {
           //   console.log("It's on pagesinit");
           //   PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
@@ -198,7 +199,8 @@
           viewer._getVisiblePages = this._visPages;
           
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
-          viewer.spreadMode = PDFViewerApplicationOptions.get("spreadModeOnLoad");
+          viewer.spreadMode = this._spreadBk;
+          // viewer.spreadMode = PDFViewerApplicationOptions.get("spreadModeOnLoad");
           // viewer.spreadMode = viewer.stored.spreadMode;
           
           $('#viewer .page').removeAttr('style');
