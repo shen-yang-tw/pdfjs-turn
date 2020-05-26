@@ -193,42 +193,38 @@
                 
           $('#viewer').turn('destroy');
 
-          $('#viewer .page').removeAttr('style');
-          $('#viewer').removeAttr('style').removeClass('shadow bookViewer').addClass('pdfViewer');
-
-          var parent = this;
-          $('#viewer .page').each(function() {
-            var page = $(this).attr('data-page-number');
-            $(this).css('width', parent._size(page, 'width')).css('height', parent._size(page, 'height'));
-          });
-
           var viewer = PDFViewerApplication.pdfViewer;
-          
-          viewer._getVisiblePages = this._visPages;
           viewer.scrollPageIntoView = this._intoView;
-          // viewer._getVisiblePages();
-          // viewer.scrollPageIntoView();
-          // viewer.getVisibleElements();
-          // viewer.getPageView();
-          viewer.scrollPageIntoView = (data) => {
-            return this.link(data)
-          };
-          viewer._getVisiblePages = () => {
-            return this.load()
-          };
-          var scale = viewer.currentScale;
-          var parent = this;
-          $('#viewer .page').each(function() {
-            parent._width[$(this).attr('data-page-number')] = $(this).width() / scale;
-            parent._height[$(this).attr('data-page-number')] = $(this).height() / scale;
-          });
+          viewer._getVisiblePages = this._visPages;
           
-          console.log("It's _getVisiblePages");
-
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
-          // this.setInitialView();
           viewer.spreadMode = PDFViewerApplicationOptions.get("spreadModeOnLoad");
           // viewer.spreadMode = viewer.stored.spreadMode;
+          
+          $('#viewer .page').removeAttr('style');
+          $('#viewer').removeAttr('style').removeClass('shadow bookViewer').addClass('pdfViewer');
+          
+          var parent = this;
+          $('#viewer .page').each(function(){
+            var page = $(this).attr('data-page-number');
+            $(this).css( 'width', parent._size(page,'width')).css( 'height', parent._size(page,'height'));
+          });
+                
+          
+          // viewer._getVisiblePages = this._visPages;
+          // viewer.scrollPageIntoView = this._intoView;
+
+          // viewer.scrollPageIntoView = (data) => {
+          //   return this.link(data)
+          // };
+          // viewer._getVisiblePages = () => {
+          //   return this.load()
+          // };
+          
+          // console.log("It's _getVisiblePages");
+
+          // PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
+          // viewer.spreadMode = PDFViewerApplicationOptions.get("spreadModeOnLoad");
 
           console.log("It's stop and pdfViewer");
         },
