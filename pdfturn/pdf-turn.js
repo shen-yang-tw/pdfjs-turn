@@ -101,7 +101,7 @@
               // this._ready = true;
               this.active = true;
               this.start();
-              } else {
+            } else {
               this.active = false;
               this.stop();
             }
@@ -127,21 +127,21 @@
             //   this.toStart = false;
             //   PDFViewerApplication.pdfViewer.scrollMode = 3;
             // }
-                  
+
           });
 
           //--
           // $(document).on('baseviewerinit', () => {
           //   PDFViewerApplicationOptions.set('scrollModeOnLoad',3);
-            
+
           //   // this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
           //   // this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
           // });
-      
+
           //++
           this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
           this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
-      
+
           console.log("It's on _getVisiblePages");
         },
         // startup flipbook
@@ -150,7 +150,7 @@
           //--
           // if(this.active || !this._ready)return;
           // this.active = true;
-                
+
           //++
           if (!this.active) return;
 
@@ -215,32 +215,35 @@
           // if(!this.active)return;
           // this.active = false;
 
+          console.log("The _ready is:" + this._ready);
+
           //++
           if (this.active || !this._ready) return;
           this._ready = true;
 
-                      
+          console.log("The _ready is:" + this._ready);
+          
           $('#viewer').turn('destroy');
 
           var viewer = PDFViewerApplication.pdfViewer;
           viewer.scrollPageIntoView = this._intoView;
           viewer._getVisiblePages = this._visPages;
-          
+
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
           //--
           // viewer.spreadMode = PDFViewerApplicationOptions.get("spreadModeOnLoad");
           //++
           viewer.spreadMode = this._spreadBk;
-          
+
           $('#viewer .page').removeAttr('style');
           $('#viewer').removeAttr('style').removeClass('shadow bookViewer').addClass('pdfViewer');
-          
+
           var parent = this;
-          $('#viewer .page').each(function(){
+          $('#viewer .page').each(function() {
             var page = $(this).attr('data-page-number');
-            $(this).css( 'width', parent._size(page,'width')).css( 'height', parent._size(page,'height'));
+            $(this).css('width', parent._size(page, 'width')).css('height', parent._size(page, 'height'));
           });
-          
+
           console.log("It's stop and pdfViewer");
         },
         // resize flipbook pages
