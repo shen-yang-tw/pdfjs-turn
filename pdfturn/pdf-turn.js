@@ -123,11 +123,11 @@
             PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
 
             //--
-            this._ready = true;
-            if(this.toStart){
-              this.toStart = false;
-              PDFViewerApplication.pdfViewer.scrollMode = 3;
-            }
+            // this._ready = true;
+            // if(this.toStart){
+            //   this.toStart = false;
+            //   PDFViewerApplication.pdfViewer.scrollMode = 3;
+            // }
                   
           });
 
