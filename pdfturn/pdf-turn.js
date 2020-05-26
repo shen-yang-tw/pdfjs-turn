@@ -218,6 +218,8 @@
           console.log("The _ready is:" + this._ready);
 
           //++
+          // if (this.active) return;
+
           if (this.active || this._ready) return;
           this._ready = true;
 
@@ -236,12 +238,12 @@
           viewer.spreadMode = this._spreadBk;
 
           //--
-          viewer.scrollPageIntoView = (data) => {
-            return this.link(data)
-          };
-          viewer._getVisiblePages = () => {
-            return this.load()
-          };
+          // viewer.scrollPageIntoView = (data) => {
+          //   return this.link(data)
+          // };
+          // viewer._getVisiblePages = () => {
+          //   return this.load()
+          // };
           
           $('#viewer .page').removeAttr('style');
           $('#viewer').removeAttr('style').removeClass('shadow bookViewer').addClass('pdfViewer');
