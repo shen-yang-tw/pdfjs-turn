@@ -87,9 +87,10 @@
             // if (scroll === 3) this.start();
             // else this.stop();
             if (scroll === 3) {
-              this._rkeady = true;
+              this._ready = true;
               this.start();
-              } else {
+              console.log("The active is:" + this.active);
+            } else {
               // this._ready = false;
               // this.active = false;
               this.stop();
@@ -97,7 +98,7 @@
 
             //++
             // if (scroll === 3) {
-            //   // this._rkeady = true;
+            //   // this._ready = true;
             //   this.active = true;
             //   this.start();
             //   } else {
