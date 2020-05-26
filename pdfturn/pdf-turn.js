@@ -120,7 +120,7 @@
           PDFViewerApplication.eventBus._on('pagesinit', () => {
             console.log("It's on pagesinit");
             //++
-            // PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
+            PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
 
             //--
             this._ready = true;
@@ -135,13 +135,13 @@
           $(document).on('baseviewerinit', () => {
             PDFViewerApplicationOptions.set('scrollModeOnLoad',3);
             
-            this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
-            this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
+            // this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
+            // this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
           });
       
           //++
-          // this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
-          // this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
+          this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
+          this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
       
           console.log("It's on _getVisiblePages");
         },
