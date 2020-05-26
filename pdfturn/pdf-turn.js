@@ -40,7 +40,7 @@
         _spreadBk: NaN, //spread mode backup to restore
         _evSpread: null, //spread mode changed default event handler 
         _spread: NaN, //spread page mode
-        toStart: false, //--PDFjs require flipbook at start
+        // toStart: false, //--PDFjs require flipbook at start
         _intoView: null, //link handler default function
         _visPages: null, //visible pages function
         _ready: false, //--ready to start flipbook
@@ -71,12 +71,12 @@
           });
 
           //--
-          PDFViewerApplication.eventBus._on('documentinit', () => {
-            console.log("It's on documentinit");
-            this.stop();
-            console.log("It's documentinit and bookFlip stop");
-            this._ready = false;
-          });
+          // PDFViewerApplication.eventBus._on('documentinit', () => {
+          //   console.log("It's on documentinit");
+          //   this.stop();
+          //   console.log("It's documentinit and bookFlip stop");
+          //   this._ready = false;
+          // });
 
           PDFViewerApplication.eventBus._on('scrollmodechanged', () => {
             console.log("It's on scrollmodechanged");
@@ -86,26 +86,25 @@
             //--
             // if (scroll === 3) this.start();
             // else this.stop();
-            if (scroll === 3) {
-              this._ready = true;
-              this.start();
-              console.log("The active is:" + this.active);
-            } else {
-              // this._ready = false;
-              // this.active = false;
-              this.stop();
-            }
-
-            //++
             // if (scroll === 3) {
-            //   // this._ready = true;
-            //   this.active = true;
+            //   this._ready = true;
             //   this.start();
-            //   } else {
-            //   this._ready = false;
-            //   this.active = false;
+            //   console.log("The active is:" + this.active);
+            // } else {
+            //   // this._ready = false;
+            //   // this.active = false;
             //   this.stop();
             // }
+
+            //++
+            if (scroll === 3) {
+              // this._ready = true;
+              this.active = true;
+              this.start();
+              } else {
+              this.active = false;
+              this.stop();
+            }
           });
 
           PDFViewerApplication.eventBus._on('switchspreadmode', (evt) => {
@@ -132,12 +131,12 @@
           });
 
           //--
-          $(document).on('baseviewerinit', () => {
-            PDFViewerApplicationOptions.set('scrollModeOnLoad',3);
+          // $(document).on('baseviewerinit', () => {
+          //   PDFViewerApplicationOptions.set('scrollModeOnLoad',3);
             
-            // this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
-            // this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
-          });
+          //   // this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
+          //   // this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
+          // });
       
           //++
           this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
@@ -149,11 +148,11 @@
         start: function() {
           console.log("It's flipbook start");
           //--
-          if(this.active || !this._ready)return;
-          this.active = true;
+          // if(this.active || !this._ready)return;
+          // this.active = true;
                 
           //++
-          // if (!this.active) return;
+          if (!this.active) return;
 
           var viewer = PDFViewerApplication.pdfViewer;
 
@@ -213,11 +212,12 @@
         stop: function() {
           console.log("It's flipbook stop");
           //--
-          if(!this.active)return;
-          this.active = false;
+          // if(!this.active)return;
+          // this.active = false;
 
           //++
-          // if (this.active) return;
+          if (this.active || !this._ready) return;
+          this._ready = true;
 
                       
           $('#viewer').turn('destroy');
