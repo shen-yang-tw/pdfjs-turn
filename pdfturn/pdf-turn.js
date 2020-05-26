@@ -160,7 +160,7 @@
           this._spreadBk = viewer.spreadMode;
           this._spread = (this._spreadBk !== 2) ? 0 : 2;
           viewer.spreadMode = 0;
-          viewer._spreadMode = -1;
+          // viewer._spreadMode = -1;
 
           this._evSpread = PDFViewerApplication.eventBus._listeners.switchspreadmode;
           PDFViewerApplication.eventBus._listeners.switchspreadmode = null;
@@ -228,9 +228,9 @@
           
           PDFViewerApplication.eventBus._listeners.switchspreadmode = this._evSpread;
           //--
-          viewer.spreadMode = PDFViewerApplicationOptions.get("spreadModeOnLoad");
+          // viewer.spreadMode = PDFViewerApplicationOptions.get("spreadModeOnLoad");
           //++
-          // viewer.spreadMode = this._spreadBk;
+          viewer.spreadMode = this._spreadBk;
           
           $('#viewer .page').removeAttr('style');
           $('#viewer').removeAttr('style').removeClass('shadow bookViewer').addClass('pdfViewer');
