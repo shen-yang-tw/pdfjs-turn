@@ -218,7 +218,7 @@
           console.log("The _ready is:" + this._ready);
 
           //++
-          if (this.active || !this._ready) return;
+          if (this.active || this._ready) return;
           this._ready = true;
 
           console.log("The _ready is:" + this._ready);
