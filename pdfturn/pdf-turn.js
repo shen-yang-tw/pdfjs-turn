@@ -220,7 +220,7 @@
           //++
           // if (this.active) return;
 
-          if (this.active || this._ready) return;
+          if (this.active || this._ready || $('#viewer').hasClass('pdfViewer')) return;
           this._ready = true;
 
           console.log("The _ready is:" + this._ready);
