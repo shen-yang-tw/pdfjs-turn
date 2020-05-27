@@ -222,6 +222,7 @@
             parent._width[$(this).attr('data-page-number')] = $(this).width() / scale;
             parent._height[$(this).attr('data-page-number')] = $(this).height() / scale;
           });
+          console.log("It's on page")
         },
         // shutdown flipbook
         stop: function() {
