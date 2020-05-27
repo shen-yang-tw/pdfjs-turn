@@ -130,6 +130,7 @@
 
           //--
           $(document).on('baseviewerinit', () => {
+            console.log("It's on baseviewerinit");
             PDFViewerApplicationOptions.set('scrollModeOnLoad',3);
 
             // this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
@@ -162,19 +163,20 @@
           this._evSpread = PDFViewerApplication.eventBus._listeners.switchspreadmode;
           PDFViewerApplication.eventBus._listeners.switchspreadmode = null;
 
-          viewer.scrollPageIntoView = (data) => {
-            return this.link(data)
-          };
-          viewer._getVisiblePages = () => {
-            return this.load()
-          };
+          this.page();
+          // viewer.scrollPageIntoView = (data) => {
+          //   return this.link(data)
+          // };
+          // viewer._getVisiblePages = () => {
+          //   return this.load()
+          // };
 
-          var scale = viewer.currentScale;
-          var parent = this;
-          $('#viewer .page').each(function() {
-            parent._width[$(this).attr('data-page-number')] = $(this).width() / scale;
-            parent._height[$(this).attr('data-page-number')] = $(this).height() / scale;
-          });
+          // var scale = viewer.currentScale;
+          // var parent = this;
+          // $('#viewer .page').each(function() {
+          //   parent._width[$(this).attr('data-page-number')] = $(this).width() / scale;
+          //   parent._height[$(this).attr('data-page-number')] = $(this).height() / scale;
+          // });
 
           $('#viewer').removeClass('pdfViewer').addClass('bookViewer')
 
@@ -205,7 +207,21 @@
         },
         //
         page: function() {
+          this.active = true;
+          var viewer = PDFViewerApplication.pdfViewer;
+          viewer.scrollPageIntoView = (data) => {
+            return this.link(data)
+          };
+          viewer._getVisiblePages = () => {
+            return this.load()
+          };
 
+          var scale = viewer.currentScale;
+          var parent = this;
+          $('#viewer .page').each(function() {
+            parent._width[$(this).attr('data-page-number')] = $(this).width() / scale;
+            parent._height[$(this).attr('data-page-number')] = $(this).height() / scale;
+          });
         },
         // shutdown flipbook
         stop: function() {
@@ -235,13 +251,7 @@
           //++
           viewer.spreadMode = this._spreadBk;
 
-          //--
-          viewer.scrollPageIntoView = (data) => {
-            return this.link(data)
-          };
-          viewer._getVisiblePages = () => {
-            return this.load()
-          };
+          this.page();
           
           $('#viewer .page').removeAttr('style');
           $('#viewer').removeAttr('style').removeClass('shadow bookViewer').addClass('pdfViewer');
