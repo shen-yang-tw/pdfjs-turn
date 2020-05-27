@@ -71,12 +71,10 @@
           });
 
           //--
-          // PDFViewerApplication.eventBus._on('documentinit', () => {
-          //   console.log("It's on documentinit");
-          //   this.stop();
-          //   console.log("It's documentinit and bookFlip stop");
-          //   this._ready = false;
-          // });
+          PDFViewerApplication.eventBus._on('documentinit', () => {
+            console.log("It's on documentinit");
+            PDFViewerApplicationOptions.set('scrollModeOnLoad', 3);
+          });
 
           PDFViewerApplication.eventBus._on('scrollmodechanged', () => {
             console.log("It's on scrollmodechanged");
@@ -131,12 +129,12 @@
           });
 
           //--
-          // $(document).on('baseviewerinit', () => {
-          //   PDFViewerApplicationOptions.set('scrollModeOnLoad',3);
+          $(document).on('baseviewerinit', () => {
+            PDFViewerApplicationOptions.set('scrollModeOnLoad',3);
 
-          //   // this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
-          //   // this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
-          // });
+            // this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
+            // this._visPages = PDFViewerApplication.pdfViewer._getVisiblePages;
+          });
 
           //++
           this._intoView = PDFViewerApplication.pdfViewer.scrollPageIntoView;
