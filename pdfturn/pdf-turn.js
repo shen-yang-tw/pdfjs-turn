@@ -178,19 +178,16 @@
             parent._height[$(this).attr('data-page-number')] = $(this).height() / scale;
           });
 
-          // $('#viewer').removeClass('pdfViewer').addClass('bookViewer').css({
-          //   opacity: 1
-          // });
           $('#viewer').removeClass('pdfViewer').addClass('bookViewer')
 
-          var pages = PDFViewerApplication.pagesCount;
-          console.log("It's flipbook pagesCount: " + pages);
-          for (var page = 3; page < pages + (pages % 2); page++) {
-            if (this._height[page] != this._height[page - 1] || this._width[page] != this._width[page - 1]) {
-              $('#spreadEven').prop('disabled', true);
-              this._spread = 0;
-            }
-          }
+          // var pages = PDFViewerApplication.pagesCount;
+          // console.log("It's flipbook pagesCount: " + pages);
+          // for (var page = 3; page < pages + (pages % 2); page++) {
+          //   if (this._height[page] != this._height[page - 1] || this._width[page] != this._width[page - 1]) {
+          //     $('#spreadEven').prop('disabled', true);
+          //     this._spread = 0;
+          //   }
+          // }
 
           $('#viewer').turn({
             elevation: 50,
@@ -207,6 +204,10 @@
           });
           console.log("It's turn")
           console.log("It's flipbook start end")
+        },
+        //
+        page: function() {
+
         },
         // shutdown flipbook
         stop: function() {
@@ -237,12 +238,12 @@
           viewer.spreadMode = this._spreadBk;
 
           //--
-          // viewer.scrollPageIntoView = (data) => {
-          //   return this.link(data)
-          // };
-          // viewer._getVisiblePages = () => {
-          //   return this.load()
-          // };
+          viewer.scrollPageIntoView = (data) => {
+            return this.link(data)
+          };
+          viewer._getVisiblePages = () => {
+            return this.load()
+          };
           
           $('#viewer .page').removeAttr('style');
           $('#viewer').removeAttr('style').removeClass('shadow bookViewer').addClass('pdfViewer');
@@ -252,7 +253,7 @@
             var page = $(this).attr('data-page-number');
             $(this).css('width', parent._size(page, 'width')).css('height', parent._size(page, 'height'));
           });
-          
+
           this.active = false;
 
           console.log("It's stop and pdfViewer");
