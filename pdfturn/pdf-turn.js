@@ -86,25 +86,25 @@
             //--
             // if (scroll === 3) this.start();
             // else this.stop();
-            // if (scroll === 3) {
-            //   this._ready = true;
-            //   this.start();
-            //   console.log("The active is:" + this.active);
-            // } else {
-            //   // this._ready = false;
-            //   // this.active = false;
-            //   this.stop();
-            // }
-
-            //++
             if (scroll === 3) {
-              // this._ready = true;
-              this.active = true;
+              this._ready = true;
               this.start();
+              console.log("The active is:" + this.active);
             } else {
-              this.active = false;
+              // this._ready = false;
+              // this.active = false;
               this.stop();
             }
+
+            //++
+            // if (scroll === 3) {
+            //   // this._ready = true;
+            //   this.active = true;
+            //   this.start();
+            // } else {
+            //   this.active = false;
+            //   this.stop();
+            // }
           });
 
           PDFViewerApplication.eventBus._on('switchspreadmode', (evt) => {
@@ -148,11 +148,11 @@
         start: function() {
           console.log("It's flipbook start");
           //--
-          // if(this.active || !this._ready)return;
-          // this.active = true;
+          if(this.active || !this._ready)return;
+          this.active = true;
 
           //++
-          if (!this.active) return;
+          // if (!this.active) return;
 
           var viewer = PDFViewerApplication.pdfViewer;
 
@@ -212,16 +212,15 @@
         stop: function() {
           console.log("It's flipbook stop");
           //--
-          // if(!this.active)return;
-          // this.active = false;
+          if(!this.active)return;
 
           console.log("The _ready is:" + this._ready);
 
           //++
           // if (this.active) return;
 
-          if (this.active || this._ready || $('#viewer').hasClass('pdfViewer')) return;
-          this._ready = true;
+          // if (this.active || this._ready || $('#viewer').hasClass('pdfViewer')) return;
+          // this._ready = true;
 
           console.log("The _ready is:" + this._ready);
           
@@ -238,12 +237,12 @@
           viewer.spreadMode = this._spreadBk;
 
           //--
-          viewer.scrollPageIntoView = (data) => {
-            return this.link(data)
-          };
-          viewer._getVisiblePages = () => {
-            return this.load()
-          };
+          // viewer.scrollPageIntoView = (data) => {
+          //   return this.link(data)
+          // };
+          // viewer._getVisiblePages = () => {
+          //   return this.load()
+          // };
           
           $('#viewer .page').removeAttr('style');
           $('#viewer').removeAttr('style').removeClass('shadow bookViewer').addClass('pdfViewer');
@@ -253,6 +252,8 @@
             var page = $(this).attr('data-page-number');
             $(this).css('width', parent._size(page, 'width')).css('height', parent._size(page, 'height'));
           });
+          
+          this.active = false;
 
           console.log("It's stop and pdfViewer");
         },
